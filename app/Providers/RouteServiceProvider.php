@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
 
     // redirect user en admin naar het user dashboard
-    public const HOME = 'redirects';
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

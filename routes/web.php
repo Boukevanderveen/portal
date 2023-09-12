@@ -3,11 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ToetsController;
-use App\Http\Controllers\UitjeController;
-use App\Http\Controllers\KeuzeController;
-use App\Http\Controllers\BoekController;
-use App\Http\Controllers\GebruikerController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\TripController;
+use App\Http\Controllers\ElectiveController;
+use App\Http\Controllers\BookController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -22,40 +22,144 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    })->name('index');
+
+    Route::group([ 'prefix' => 'tests', 'as' => 'tests.'], function ()
+    {
+        Route::get('', [TestController::class, 'index'])->name('index');
+
+        Route::group([ 'prefix' => '{test}'], function ()
+        {
+            Route::get('show', [TestController::class, 'show'])->name('show');
+        });
+    });
+
+    Route::group([ 'prefix' => 'trips', 'as' => 'trips.'], function ()
+    {
+        Route::get('', [TripController::class, 'index'])->name('index');
+
+        Route::group([ 'prefix' => '{trip}'], function ()
+        {
+            Route::delete('destroy', [TripController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::get('search', [TripController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'electives', 'as' => 'electives.'], function ()
+    {
+        Route::get('', [ElectiveController::class, 'index'])->name('index');
+
+        Route::group([ 'prefix' => '{elective}'], function ()
+        {
+            Route::get('show', [ElectiveController::class, 'show'])->name('show');
+        });
+
+        Route::get('search', [ElectiveController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'books', 'as' => 'books.'], function ()
+    {
+        Route::get('', [BookController::class, 'index'])->name('index');
+
+        Route::group([ 'prefix' => '{book}'], function ()
+        {
+            Route::get('show', [BookController::class, 'show'])->name('show');
+        });
+
+        Route::get('search', [BookController::class, 'searchIndex'])->name('search');
+    });
+
+Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],function ()
+{
+    Route::get('', function () {
+        return view('admin.index');
+    })->name('index');
+    
+    Route::group([ 'prefix' => 'users', 'as' => 'users.'], function ()
+    {
+        Route::get('', [UserController::class, 'index'])->name('index');
+        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::post('store', [UserController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{user}'], function ()
+        {
+            Route::delete('destroy', [UserController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [UserController::class, 'edit'])->name('edit');
+            Route::post('update', [UserController::class, 'update'])->name('update');
+        });
+
+        Route::get('search', [UserController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'tests', 'as' => 'tests.'], function ()
+    {
+        Route::get('', [TestController::class, 'adminIndex'])->name('index');
+        Route::get('create', [TestController::class, 'create'])->name('create');
+        Route::post('store', [TestController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{test}'], function ()
+        {
+            Route::delete('destroy', [TestController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [TestController::class, 'edit'])->name('edit');
+            Route::post('update', [TestController::class, 'update'])->name('update');
+        });
+
+        Route::get('search', [TestController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'trips', 'as' => 'trips.'], function ()
+    {
+        Route::get('', [TripController::class, 'adminIndex'])->name('index');
+        Route::get('create', [TripController::class, 'create'])->name('create');
+        Route::post('store', [TripController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{trip}'], function ()
+        {
+            Route::delete('destroy', [TripController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [TripController::class, 'edit'])->name('edit');
+            Route::post('update', [TripController::class, 'update'])->name('update');
+        });
+
+        Route::get('search', [TripController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'electives', 'as' => 'electives.'], function ()
+    {
+        Route::get('', [ElectiveController::class, 'adminIndex'])->name('index');
+        Route::get('create', [ElectiveController::class, 'create'])->name('create');
+        Route::post('store', [ElectiveController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{elective}'], function ()
+        {
+            Route::delete('destroy', [ElectiveController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [ElectiveController::class, 'edit'])->name('edit');
+            Route::post('update', [ElectiveController::class, 'update'])->name('update');
+        });
+
+        Route::get('search', [ElectiveController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'books', 'as' => 'books.'], function ()
+    {
+        Route::get('', [BookController::class, 'adminIndex'])->name('index');
+        Route::get('create', [BookController::class, 'create'])->name('create');
+        Route::post('store', [BookController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{book}'], function ()
+        {
+            Route::delete('destroy', [BookController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [BookController::class, 'edit'])->name('edit');
+            Route::post('update', [BookController::class, 'update'])->name('update');
+        });
+
+        Route::get('search', [BookController::class, 'searchIndex'])->name('search');
+    });
+});
 });
 
-//route is used for navigating between user and admin dashboard
-Route::get('redirects', 'App\Http\Controllers\HomeController@adminDashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-// user routing
-Route::middleware(['auth', 'user-access:user'])->group(function () {
-  
-    //public function dashboard staat in de HomeController
-    Route::get('/user/dashboard', [HomeController::class, 'index'])->name('dashboard');
-    Route::get('/user/toetsen', [ToetsController::class, 'toets'])->name('toetsen');
-    Route::get('/user/uitjes', [UitjeController::class, 'uitje'])->name('uitjes');
-    Route::get('/user/keuzedelen', [KeuzeController::class, 'keuze'])->name('keuzedelen');
-    Route::get('/user/boekenlijst', [BoekController::class, 'boek'])->name('boekenlijst');
-});
-
-// admin routing
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
-  
-    //public function adminDashboard staat in de HomeController
-    Route::get('/admin/admin_dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
-    Route::get('/admin/admin_toetsen', [ToetsController::class, 'toets'])->name('admin.toetsen');
-    Route::get('/admin/admin_uitjes', [UitjeController::class, 'uitje'])->name('admin.uitjes');
-    Route::get('/admin/admin_keuzedelen', [KeuzeController::class, 'keuze'])->name('admin.keuzedelen');
-    Route::get('/admin/admin_boekenlijst', [BoekController::class, 'boek'])->name('admin.boekenlijst');
-    Route::get('/admin/admin_gebruikers', [GebruikerController::class, 'gebruiker'])->name('admin.gebruikers');
-});  
 
 require __DIR__.'/auth.php';

@@ -38,6 +38,8 @@
 
                     </div>
                     <div class="">
+
+                    @include('layouts.sidebar')
                     @yield('content')
 
                 </div>

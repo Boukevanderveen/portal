@@ -15,9 +15,10 @@ class MultiAuth
      */
     public function handle(Request $request, Closure $next, $userType): Response
     {
-        if(auth()->user()->type == $userType){
+        if(auth()->user()->type !== 1){
             return $next($request);
         }
+        //dd($userType);
         
         return response()->json(['You do not have permission to access this page.']);
         /* return response()->view('errors.check-permission'); */
