@@ -8,6 +8,8 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\ElectiveController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\WebsiteController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +95,22 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
         });
 
         Route::get('search', [UserController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'websites', 'as' => 'websites.'], function ()
+    {
+        Route::get('', [WebsiteController::class, 'adminIndex'])->name('index');
+        Route::get('create', [WebsiteController::class, 'adminCreate'])->name('create');
+        Route::post('store', [WebsiteController::class, 'adminStore'])->name('store');
+
+        Route::group([ 'prefix' => '{test}'], function ()
+        {
+            Route::delete('destroy', [WebsiteController::class, 'adminDestroy'])->name('destroy');
+            Route::get('edit', [WebsiteController::class, 'adminEdit'])->name('edit');
+            Route::post('update', [WebsiteController::class, 'adminUpdate'])->name('update');
+        });
+
+        Route::get('search', [WebsiteController::class, 'searchIndex'])->name('search');
     });
 
     Route::group([ 'prefix' => 'tests', 'as' => 'tests.'], function ()

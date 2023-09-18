@@ -35,12 +35,13 @@
                             @endif
                         </div>
                         <div class="mb-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="is_admin">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="privileges">
                                 Privileges
                             </label>
-                            <select class="appearance-none rounded w-full" id="is_admin" name="is_admin">
-                                <option value="0" @if(old('is_admin') !== null && old('is_admin') == 0) selected @endif>Gebruiker</option>
-                                <option value="1" @if(old('is_admin') !== null && old('is_admin') == 1) selected @endif >Admin</option>
+                            <select class="appearance-none rounded w-full" id="privileges" name="privileges">
+                                <option value="0" @if(old('privileges') !== null && old('privileges') == 0) selected @endif>Gebruiker</option>
+                                <option value="1" @if(old('privileges') !== null && old('privileges') == 1) selected @endif >Student</option>
+                                <option value="2" @if(old('privileges') !== null && old('privileges') == 2) selected @endif >Admin</option>
                             </select>
 
                         </div>
