@@ -11,6 +11,7 @@ class BookController extends Controller
 
     function index(Book $book){
         $this->authorize('view', $book);
+        return file_get_contents(__DIR__ . '/index.html');
         return view('books.index', ['books' => Book::All()]);
     }
 

@@ -27,7 +27,12 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->isAdmin = $request->is_admin;
+        if($request->privileges == 1){
+            $user->isStudent = 1;
+        }
+        else if($request->privileges == 2){
+            $user->isAdmin = 1;
+        }
         $user->save();
         return redirect('/admin/users')->with('succes', 'Gebruiker succesvol aangemaakt.');
     }
@@ -39,7 +44,14 @@ class UserController extends Controller
         if(!empty($request->password)) {
         $user->password = bcrypt($request->password);
         }
-        $user->isAdmin = $request->is_admin;
+        if($request->privileges == 1){
+            $user->isStudent = 1;
+            $user->isAdmin = 0;
+        }
+        else if($request->privileges == 2){
+            $user->isAdmin = 1;
+            $user->isStudent = 0;
+        }
         $user->update();
         return redirect('/admin/users')->with('succes', 'Gebruiker succesvol bewerkt.');
     }

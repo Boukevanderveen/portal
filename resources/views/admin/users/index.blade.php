@@ -19,6 +19,9 @@
                             E-mail
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Rechten
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Gemaakt op:
                         </th>
                     </tr>
@@ -31,6 +34,12 @@
                         </td>
                         <td class="px-6 py-4">
                             {{$user->email}}
+                        </td>
+                        <td class="px-6 py-4">
+                            @if(!$user->isStudent && !$user->isAdmin) Gebruiker @endif
+                            @if($user->isStudent) Student @endif
+                            @if($user->isAdmin) Admin @endif
+
                         </td>
                         <td class="px-6 py-4">
                             {{ $user->created_at->format('d-m-Y')}}

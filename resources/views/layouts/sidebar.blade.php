@@ -23,6 +23,12 @@
              </a>
           </li>
           <li>
+            <a href="{{ route('admin.websites.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+               <i class="fa-solid fa-globe"></i>
+               <span class="flex-1 ml-3 whitespace-nowrap ">Websites</span>
+            </a>
+         </li>
+          <li>
             <a href="{{ route('admin.tests.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
                <i class="fa-solid fas fa-pen-alt"></i>
                <span class="flex-1 ml-3 whitespace-nowrap ">Toetsen</span>
