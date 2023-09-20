@@ -25,6 +25,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('websites/show2', [WebsiteController::class, 'show'])->name('show2');
+
     Route::get('/', function () {
         return view('index');
     })->name('index');

@@ -8,10 +8,17 @@ use App\Models\User;
 use App\Http\Requests\StoreWebsiteRequest;
 use App\Http\Requests\UpdateWebsiteRequest;
 use Illuminate\Support\Facades\Storage;
+use File;
 use ZipArchive;
 
 class WebsiteController extends Controller
-{   
+{
+    function show(){
+        //$this->authorize('view', $website);
+        return File::get(storage_path() . '\app\websites\2\Nieuwe-map\index.blade.php');
+
+        return response()->file(storage_path('app\Nieuwemap.zip'));
+    }
 
     function adminIndex(Website $website){
         $this->authorize('view', $website);
@@ -39,14 +46,13 @@ class WebsiteController extends Controller
         if ($request->hasFile('file')) 
         {
             $fileName = $request->file->getClientOriginalName();
-            Storage::disk('local')->put('websites/'.$request->student_id, $request->file('file'));
-
+            Storage::disk('local')->putFileAs('websites/'.$request->student_id, $request->file('file'), $fileName);
             $zip = new ZipArchive;
-            if ($zip->open(storage_path('websites/'.$fileName.'')) === TRUE) {
+            if ($zip->open(storage_path('app/websites/'.$request->student_id.'/'.$fileName.'')) === TRUE) {
                 // Unzip Path
-                $zip->extractTo(storage_path('websites/'.$request->student_id.'/'));
+                $zip->extractTo(storage_path('app/websites/'.$request->student_id.'/'));
                 $zip->close();
-                unlink(storage_path('websites/'.$request->student_id.'/'.$fileName.''));
+                unlink(storage_path('app/websites/'.$request->student_id.'/'.$fileName.''));
             }
         }
 
