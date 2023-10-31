@@ -11,7 +11,6 @@
                 @csrf
                 <div class="grid grid-cols-5 gap-4">
                     <div class="text-3xl col-start-2 col-span-3">
-
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
                                 Naam *
@@ -94,6 +93,17 @@
                             @if ($errors->has('resit_time'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('resit_time') }}</p>
                             @endif
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="registerable">
+                                Inschrijfbaar *
+                            </label>
+                            <select class="appearance-none rounded w-full" id="registerable" name="registerable">
+                                <option selected value="0" @if(old('registerable') !== null && old('registerable') == 0) selected @endif>Niet inschrijfbaar</option>
+                                <option value="1" @if(old('registerable') !== null && old('registerable') == 1) selected @endif >Inschrijfbaar</option>
+                            </select>
+
                         </div>
        
                         <button type="submit"

@@ -18,7 +18,7 @@
                                 Naam
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Tijd
+                                Tijdstip
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Datum
@@ -28,9 +28,6 @@
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Locatie
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Onderwerp
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Gemaakt op:
@@ -54,9 +51,6 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $trip->location }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $trip->subject }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $trip->created_at->format('d-m-Y') }}

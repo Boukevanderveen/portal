@@ -11,7 +11,6 @@ class BookController extends Controller
 
     function index(Book $book){
         $this->authorize('view', $book);
-        return file_get_contents(__DIR__ . '/index.html');
         return view('books.index', ['books' => Book::All()]);
     }
 
@@ -30,11 +29,10 @@ class BookController extends Controller
         return view('admin.books.edit', compact(['book']));
     }
 
-    function store(StoreBookRequest $request)
+    function store(Request $request)
     {
         $book = new Book;
         $book->name = $request->name;
-        $book->description = $request->description;
         $book->ISBN = $request->ISBN;
         $book->price = $request->price;
         $book->school_year = $request->school_year;
@@ -45,7 +43,6 @@ class BookController extends Controller
     function update(UpdateBookRequest $request, Book $book)
     {
         $book->name = $request->name;
-        $book->description = $request->description;
         $book->ISBN = $request->ISBN;
         $book->price = $request->price;
         $book->school_year = $request->school_year;

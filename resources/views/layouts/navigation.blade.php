@@ -5,8 +5,8 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <a class="w-20" href="{{ route('index') }}">
+                        <img src="{{ asset('/logo/Firda_Logo_Groen_CMYK.png') }}"> 
                     </a>
                 </div>
 
@@ -18,7 +18,13 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('tests.index')" :active="request()->routeIs('tests.index')">
+                    <x-nav-link :href="route('mywebsites.index')" :active="request()->routeIs('mywebsites.index')">
+                        Mijn websites
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('tests.index')" :active="request()->routeIs('tests.*')">
                         Toetsen
                     </x-nav-link>
                 </div>
@@ -38,6 +44,12 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
                         Boeken
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                        Projecten
                     </x-nav-link>
                 </div>
             </div>

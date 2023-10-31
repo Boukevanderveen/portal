@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Models\Website;
 use App\Models\User;
 use App\Http\Requests\StoreWebsiteRequest;
@@ -10,16 +11,85 @@ use App\Http\Requests\UpdateWebsiteRequest;
 use Illuminate\Support\Facades\Storage;
 use File;
 use ZipArchive;
+use Illuminate\Support\Facades\Process;
+use DB;
 
 class WebsiteController extends Controller
 {
-    function show(){
-        //$this->authorize('view', $website);
-        return File::get(storage_path() . '\app\websites\2\Nieuwe-map\index.blade.php');
 
-        return response()->file(storage_path('app\Nieuwemap.zip'));
+    function index(Website $website){
+        return view('websites.index', ['websites' => Website::where('user_id', Auth::User()->id)->get()]);
+    } 
+
+    function edit(Website $website){
+        $this->authorize('update', $website);
+        $students = User::where('isStudent', 1)->get();
+        return view('websites.edit', compact(['website', 'students']));
     }
 
+    function create(Website $website){
+        $this->authorize('create', $website);
+        return view('websites.create');
+    }
+
+    function update(UpdateWebsiteRequest $request, Website $website)
+    {
+        $this->authorize('update', $website);
+
+        $website->name = $request->name;
+        $website->description = $request->description;
+        if ($request->hasFile('file')) 
+        {
+            File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
+
+            $fileName = $request->file->getClientOriginalName();
+            Storage::disk('websites')->putFileAs(''.$website->user_id, $request->file('file'), $fileName);
+            $zip = new ZipArchive;
+            if ($zip->open(Storage::disk('websites')->path(''.$website->user_id.'/'.$fileName.'')) === TRUE) {
+                // Unzip Path
+                $zip->extractTo(Storage::disk('websites')->path(''.$website->user_id.'/'));
+                $zip->close();
+                unlink(Storage::disk('websites')->path(''.$website->user_id.'/'.$fileName.''));
+            }
+            $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
+
+        }
+        $website->update();
+        return redirect('/mywebsites')->with('succes', 'Website succesvol bewerkt.');
+    }
+
+    function store(StoreWebsiteRequest $request)
+    {
+        $website = new Website;
+        $website->name = $request->name;
+        $website->description = $request->description;
+        $website->user_id = Auth::User()->id;
+        if ($request->hasFile('file')) 
+        {
+            $fileName = $request->file->getClientOriginalName();
+            Storage::disk('websites')->putFileAs(''.$request->student_id, $request->file('file'), $fileName);
+            $zip = new ZipArchive;
+            if ($zip->open(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.'')) === TRUE) {
+                // Unzip Path
+                $zip->extractTo(Storage::disk('websites')->path(''.$request->student_id.'/'));
+                $zip->close();
+                unlink(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.''));
+            }
+        }
+
+        $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
+        $website->save();
+        return redirect('/mywebsites')->with('succes', 'Website succesvol aangemaakt.');
+    }
+
+    function destroy(Request $request, Website $website)
+    {
+        $this->authorize('delete', $website);
+        File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
+        $website->delete();
+        return redirect('mywebsites')->with('succes', 'Website succesvol verwijderd.');
+    }
+    
     function adminIndex(Website $website){
         $this->authorize('view', $website);
         return view('admin.websites.index', ['websites' => Website::All()]);
@@ -33,11 +103,28 @@ class WebsiteController extends Controller
 
     function adminEdit(Website $website){
         $this->authorize('update', $website);
-        return view('admin.websites.edit', compact(['website']));
+        $students = User::where('isStudent', 1)->get();
+        return view('admin.websites.edit', compact(['website', 'students']));
     }
 
     function adminStore(StoreWebsiteRequest $request)
     {
+
+        
+        if ($request->hasFile('db')) 
+        {
+
+
+
+        $dbFileName = $request->db->getClientOriginalName();
+        $dbFilePath = Storage::disk('websites')->path('db_exports/'.$dbFileName.'');
+        Storage::disk('websites')->putFileAs('db_exports', $request->file('db'), $dbFileName);
+
+        DB::statement("CREATE DATABASE $request->db_name");
+        //DB::statement("USE $request->db_name; SOURCE $dbFilePath");
+        $sql = 'mysql -u root '.$request->db_name.' < '.$dbFilePath.'';
+        $output = shell_exec($sql); 
+        }
 
         $website = new Website;
         $website->name = $request->name;
@@ -46,17 +133,17 @@ class WebsiteController extends Controller
         if ($request->hasFile('file')) 
         {
             $fileName = $request->file->getClientOriginalName();
-            Storage::disk('local')->putFileAs('websites/'.$request->student_id, $request->file('file'), $fileName);
+            Storage::disk('websites')->putFileAs(''.$request->student_id, $request->file('file'), $fileName);
             $zip = new ZipArchive;
-            if ($zip->open(storage_path('app/websites/'.$request->student_id.'/'.$fileName.'')) === TRUE) {
+            if ($zip->open(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.'')) === TRUE) {
                 // Unzip Path
-                $zip->extractTo(storage_path('app/websites/'.$request->student_id.'/'));
+                $zip->extractTo(Storage::disk('websites')->path(''.$request->student_id.'/'));
                 $zip->close();
-                unlink(storage_path('app/websites/'.$request->student_id.'/'.$fileName.''));
+                unlink(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.''));
             }
         }
 
-        $website->path = '/websites/'.$request->student_id.'/'.$fileName.'';
+        $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
         $website->save();
         return redirect('/admin/websites')->with('succes', 'Website succesvol aangemaakt.');
     }
@@ -65,15 +152,22 @@ class WebsiteController extends Controller
     {
         $website->name = $request->name;
         $website->description = $request->description;
-        $website->user_id = $request->user_id;
+        $website->user_id = $request->student_id;
         if ($request->hasFile('file')) 
         {
-            $fileName = time() . '.' . $request->file->extension();
-            $file = $request->file('file');
-            $website->path = $fileName;
-        }
-        if(isset($file)){
-            $file->move(public_path('/'.$request->user_id.''), $fileName);
+            File::deleteDirectory(Storage::disk('websites')->path(''.$request->student_id.'/'.$website->folder_name.''));
+
+            $fileName = $request->file->getClientOriginalName();
+            Storage::disk('websites')->putFileAs(''.$request->student_id, $request->file('file'), $fileName);
+            $zip = new ZipArchive;
+            if ($zip->open(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.'')) === TRUE) {
+                // Unzip Path
+                $zip->extractTo(Storage::disk('websites')->path(''.$request->student_id.'/'));
+                $zip->close();
+                unlink(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.''));
+            }
+            $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
+
         }
         $website->update();
         return redirect('/admin/websites')->with('succes', 'Website succesvol bewerkt.');
@@ -82,6 +176,7 @@ class WebsiteController extends Controller
     function adminDestroy(Request $request, Website $website)
     {
         $this->authorize('delete', $website);
+        File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
         $website->delete();
         return back()->with('succes', 'Website succesvol verwijderd.');
     }

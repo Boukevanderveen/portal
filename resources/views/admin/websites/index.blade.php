@@ -41,13 +41,17 @@
                                     <form method="post" action="{{ route('admin.websites.destroy', $website) }}"> @csrf
                                         @method('delete')
                                         <button type="submit"
-                                            onclick="return confirm('Weet je zeker dat je {{ $website->name }} wilt verwijderen?')"
+                                            onclick="return confirm('Weet je zeker dat je deze website wilt verwijderen?')"
                                             role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
 
                                         </button>
 
                                         <a href="{{ route('admin.websites.edit', $website) }}">
                                             <i class="fa fa-pencil float-right mr-5" aria-hidden="true"></i>
+                                        </a>
+
+                                        <a target="_blank" href="http://localhost/portal_websites/{{$website->user_id}}/{{$website->folder_name}}">
+                                            <i class="fa-solid fa-globe float-right mr-5" aria-hidden="true"></i>
                                         </a>
                                     </form>
 

@@ -5,7 +5,6 @@
         <div class="text-3xl col-start-1 col-span-5">
             Nieuw keuzedeel
         </div>
-
         <div class="col-start-1 col-span-5 w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
             <form method="post" action="{{ route('admin.electives.store') }}">
                 @csrf

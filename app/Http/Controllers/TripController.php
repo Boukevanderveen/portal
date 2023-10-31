@@ -11,7 +11,12 @@ class TripController extends Controller
 {
     function index(Trip $trip){
         $this->authorize('view', $trip);
-        return view('trips.index', ['trips' => Trip::All()]);
+        $trips1 = Trip::where('school_year', 1)->get();
+        $trips2 = Trip::where('school_year', 2)->get();
+        $trips3 = Trip::where('school_year', 3)->get();
+        $trips4 = Trip::where('school_year', 4)->get();
+
+        return view('trips.index', compact(['trips1', 'trips2','trips3','trips4']));
     }
 
     function adminIndex(Trip $trip){
@@ -37,7 +42,6 @@ class TripController extends Controller
         $trip->date = $request->date;
         $trip->time = $request->time;
         $trip->location = $request->location;
-        $trip->subject = $request->subject;
         $trip->save();
         return redirect('/admin/trips')->with('succes', 'Uitje succesvol aangemaakt.');
     }
@@ -49,7 +53,6 @@ class TripController extends Controller
         $trip->date = $request->date;
         $trip->time = $request->time;
         $trip->location = $request->location;
-        $trip->subject = $request->subject;
         $trip->update();
         return redirect('/admin/trips')->with('succes', 'Uitje succesvol bewerkt.');
     }

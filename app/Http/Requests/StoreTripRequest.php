@@ -28,7 +28,6 @@ class StoreTripRequest extends FormRequest
             'date' => 'required',
             'time' => 'required',
             'location' => 'required',
-            'subject' => 'required',
         ];
 
         
@@ -46,7 +45,6 @@ class StoreTripRequest extends FormRequest
             'time.required' => 'De tijd is verplicht',    
             'date.required' => 'De datum is verplicht',
             'location.required' => 'De locatie is verplicht',
-            'subject.required' => 'Het onderwerp is verplicht',
         ];
     }
 }

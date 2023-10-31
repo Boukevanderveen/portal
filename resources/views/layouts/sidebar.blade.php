@@ -52,6 +52,12 @@
                <span class="flex-1 ml-3 whitespace-nowrap ">Boeken</span>
             </a>
          </li>
+         <li>
+            <a href="{{ route('admin.projects.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+               <i class="fa-regular fa-keyboard"></i>
+               <span class="flex-1 ml-3 whitespace-nowrap ">Projecten</span>
+            </a>
+         </li>
       
         </ul>
     </div>

@@ -25,7 +25,7 @@ class UpdateElectiveRequest extends FormRequest
 
         return [
             'name' => 'required|max:55',
-            'description' => 'required|max:255',
+            'description' => 'required|max:2555',
             'hours' => 'required|numeric|max:2000',
             'teacher' => 'required:max:55',
             'period' => 'required|numeric|max:4|min:1',

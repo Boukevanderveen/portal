@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('school_year');
-            $table->string('period');
+            $table->integer('school_year');
+            $table->integer('period');
             $table->date('date');
             $table->time('time');
             $table->date('resit_date')->nullable();
             $table->time('resit_time')->nullable();
+            $table->boolean('registerable');    
             $table->timestamps();
         });
     }

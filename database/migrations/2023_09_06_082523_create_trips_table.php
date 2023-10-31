@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('school_year');
+            $table->integer('school_year');
             $table->date('date');
-            $table->time('time');
+            $table->string('time');
             $table->string('location');
-            $table->string('subject');
             $table->timestamps();
         });
     }

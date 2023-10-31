@@ -28,7 +28,7 @@
                                 Schooljaar *
                             </label>
                             <input
-                            value="{{old('school_year')}}" class="shadow appearance-none border @error('name') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            value="{{old('school_year')}}" class="shadow appearance-none border @error('school_year') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 name="school_year" id="school_year" type="number">
                             @if ($errors->has('school_year'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('school_year') }}</p>
@@ -49,11 +49,11 @@
 
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="time">
-                                Tijd *
+                                Tijdstip *
                             </label>
                             <input
                             value="{{old('time')}}" class="shadow appearance-none border @error('time') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                name="time" id="time" type="time">
+                                name="time" id="time" type="text">
                             @if ($errors->has('time'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('time') }}</p>
                             @endif
@@ -68,18 +68,6 @@
                                 name="location" id="location" type="text">
                             @if ($errors->has('location'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('location') }}</p>
-                            @endif
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">
-                                Onderwerp *
-                            </label>
-                            <input
-                            value="{{old('subject')}}" class="shadow appearance-none border @error('subject') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                name="subject" id="subject" type="text">
-                            @if ($errors->has('subject'))
-                                <p class="text-red-500 text-xs italic">{{ $errors->first('subject') }}</p>
                             @endif
                         </div>
        

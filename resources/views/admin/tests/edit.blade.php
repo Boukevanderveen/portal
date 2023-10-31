@@ -84,7 +84,7 @@
                             @endif
                         </div>
 
-                        <div class="mb-3">
+                        <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="resit_time">
                                 Tijd herkansing
                             </label>
@@ -94,6 +94,16 @@
                             @if ($errors->has('resit_time'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('resit_time') }}</p>
                             @endif
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="registerable">
+                                Inschrijfbaar *
+                            </label>
+                            <select class="appearance-none rounded w-full" id="registerable" name="registerable">
+                                <option value="0" @if(old('registerable') !== null && old('registerable') == 0) selected @else @if(!$test->registerable) selected @endif @endif>Niet inschrijfbaar</option>
+                                <option value="1" @if(old('registerable') !== null && old('registerable') == 1) selected @else @if(null == old('registerable') && $test->registerable) selected @endif @endif >Inschrijfbaar</option>
+                            </select>
                         </div>
        
                         <button type="submit"
