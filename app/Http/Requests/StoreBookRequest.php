@@ -24,7 +24,6 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'name' => 'required|max:55',
-            'description' => 'required|max:255',
             'ISBN' => 'required|max:13',
             'price' => 'required|regex:/^[0-9]{1,9}([,.][0-9]{1,9})?$/',
             'period' => 'required|numeric|max:4|min:1',
@@ -37,8 +36,6 @@ class StoreBookRequest extends FormRequest
         return [
             'name.required' => 'De naam is verplicht',
             'name.max' => 'De naam mag niet meer dan :max karakters bevatten',
-            'description.required' => 'De beschrijving is verplicht',
-            'description.max' => 'De bescrijving mag niet meer dan :max karakters bevatten',
             'ISBN.required' => 'De ISBN is verplicht',
             'ISBN.max' => 'De ISBN mag niet meer dan :max karakters bevatten',
             'price.required' => 'De prijs is verplicht',

@@ -30,7 +30,12 @@ class WebsitePolicy
      */
     public function create(User $user): bool
     {
-        return Auth::User()->isAdmin;
+        if(Auth::User()->isStudent){
+            return true;
+        }
+        else{
+            return Auth::User()->isAdmin;
+        }
     }
 
     /**
@@ -38,7 +43,12 @@ class WebsitePolicy
      */
     public function update(User $user, Website $website): bool
     {
-        return Auth::User()->isAdmin;
+        if(Auth::User()->isStudent){
+            return $website->user_id = Auth::User()->id;
+        }
+        else{
+            return Auth::User()->isAdmin;
+        }
     }
 
     /**
@@ -46,8 +56,12 @@ class WebsitePolicy
      */
     public function delete(User $user, Website $website): bool
     {
-        return Auth::User()->isAdmin;
-    }
+        if(Auth::User()->isStudent){
+            return $website->user_id = Auth::User()->id;
+        }
+        else{
+            return Auth::User()->isAdmin;
+        }    }
 
     /**
      * Determine whether the user can restore the model.

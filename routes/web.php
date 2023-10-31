@@ -9,6 +9,7 @@ use App\Http\Controllers\TripController;
 use App\Http\Controllers\ElectiveController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\ProjectController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -26,19 +27,42 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('websites/show2', [WebsiteController::class, 'show'])->name('show2');
-
     Route::get('/', function () {
         return view('index');
     })->name('index');
 
+    Route::group([ 'prefix' => 'mywebsites', 'as' => 'mywebsites.'], function ()
+    {
+        Route::get('', [WebsiteController::class, 'index'])->name('index');
+        Route::get('create', [WebsiteController::class, 'create'])->name('create');
+        Route::post('store', [WebsiteController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{website}'], function ()
+        {
+            Route::delete('destroy', [WebsiteController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [WebsiteController::class, 'edit'])->name('edit');
+            Route::post('update', [WebsiteController::class, 'update'])->name('update');
+        });
+    });
+
+    Route::group([ 'prefix' => 'projects', 'as' => 'projects.'], function ()
+    {
+        Route::get('', [ProjectController::class, 'index'])->name('index');
+    });
+
     Route::group([ 'prefix' => 'tests', 'as' => 'tests.'], function ()
     {
         Route::get('', [TestController::class, 'index'])->name('index');
+        Route::get('lastyear', [TestController::class, 'indexLastYear'])->name('lastyear');
 
         Route::group([ 'prefix' => '{test}'], function ()
         {
             Route::get('show', [TestController::class, 'show'])->name('show');
+            Route::group([ 'prefix' => 'registrations', 'as' => 'registrations.'], function ()
+            {
+                Route::post('store', [TestController::class, 'registrationsStore'])->name('store');
+                Route::delete('destroy', [TestController::class, 'registrationsDestroy'])->name('destroy');
+            });
         });
     });
 
@@ -100,13 +124,27 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
         Route::get('search', [UserController::class, 'searchIndex'])->name('search');
     });
 
+    Route::group([ 'prefix' => 'projects', 'as' => 'projects.'], function ()
+    {
+        Route::get('', [ProjectController::class, 'adminIndex'])->name('index');
+        Route::get('create', [ProjectController::class, 'create'])->name('create');
+        Route::post('store', [ProjectController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{project}'], function ()
+        {
+            Route::delete('destroy', [ProjectController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [ProjectController::class, 'edit'])->name('edit');
+            Route::post('update', [ProjectController::class, 'update'])->name('update');
+        });
+    });
+
     Route::group([ 'prefix' => 'websites', 'as' => 'websites.'], function ()
     {
         Route::get('', [WebsiteController::class, 'adminIndex'])->name('index');
         Route::get('create', [WebsiteController::class, 'adminCreate'])->name('create');
         Route::post('store', [WebsiteController::class, 'adminStore'])->name('store');
 
-        Route::group([ 'prefix' => '{test}'], function ()
+        Route::group([ 'prefix' => '{website}'], function ()
         {
             Route::delete('destroy', [WebsiteController::class, 'adminDestroy'])->name('destroy');
             Route::get('edit', [WebsiteController::class, 'adminEdit'])->name('edit');
@@ -127,6 +165,15 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
             Route::delete('destroy', [TestController::class, 'destroy'])->name('destroy');
             Route::get('edit', [TestController::class, 'edit'])->name('edit');
             Route::post('update', [TestController::class, 'update'])->name('update');
+
+            Route::group([ 'prefix' => 'registrations', 'as' => 'registrations.'], function ()
+            {
+                Route::get('', [TestController::class, 'registrationsIndex'])->name('index');
+                Route::post('store', [TestController::class, 'adminRegistrationsStore'])->name('store');
+                Route::group([ 'prefix' => '{registration}'], function (){
+                Route::delete('destroy', [TestController::class, 'adminRegistrationsDestroy'])->name('destroy');
+                });
+            });
         });
 
         Route::get('search', [TestController::class, 'searchIndex'])->name('search');

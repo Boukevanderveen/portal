@@ -39,18 +39,46 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="student_id">
                                 Leerling *
                             </label>
-                            <select class="appearance-none rounded w-full" id="student_id" name="student_id">
+                            <select class="appearance-none rounded w-full @error('student_id') border-red-500 @enderror " id="student_id" name="student_id">
                                 @foreach($students as $student)
                                 <option value="{{$student->id}}" @if(old('student_id') !== null && old('student_id') == $student->id) selected @endif>{{$student->name}}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('student_id'))
+                            <p class="text-red-500 text-xs italic">{{ $errors->first('student_id') }}</p>
+                            @endif
                         </div>
 
                         <div class="mb-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="student">
-                                Project folder *
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="db_name">
+                                DB naam
                             </label>
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" name="file" type="file">
+                            <input
+                            value="{{old('db_name')}}" class="shadow appearance-none border @error('db_name') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                name="db_name" id="db_name" type="text">
+                            @if ($errors->has('db_name'))
+                                <p class="text-red-500 text-xs italic">{{ $errors->first('db_name') }}</p>
+                            @endif
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="db">
+                                MYSQL bestand (database)
+                            </label>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 @error('db') border-red-500 @enderror" name="db" type="file">
+                            @if ($errors->has('db'))
+                            <p class="text-red-500 text-xs italic">{{ $errors->first('db') }}</p>
+                            @endif
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="file">
+                                Project bestand *
+                            </label>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 @error('file') border-red-500 @enderror" name="file" type="file">
+                            @if ($errors->has('file'))
+                            <p class="text-red-500 text-xs italic">{{ $errors->first('file') }}</p>
+                            @endif
                         </div>
 
                         <button type="submit"

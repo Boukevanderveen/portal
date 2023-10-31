@@ -47,13 +47,14 @@
                             @endif
                         </div>
 
+
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="time">
-                                Tijd *
+                                Tijd
                             </label>
                             <input
                             value="{{old('time', $trip->time)}}" class="shadow appearance-none border @error('time') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                name="time" id="time" type="time">
+                                name="time" id="time" type="text">
                             @if ($errors->has('time'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('time') }}</p>
                             @endif
@@ -68,18 +69,6 @@
                                 name="location" id="location" type="text">
                             @if ($errors->has('location'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('location') }}</p>
-                            @endif
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">
-                                Onderwerp
-                            </label>
-                            <input
-                            value="{{old('subject', $trip->subject)}}" class="shadow appearance-none border @error('subject') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                name="subject" id="subject" type="text">
-                            @if ($errors->has('subject'))
-                                <p class="text-red-500 text-xs italic">{{ $errors->first('subject') }}</p>
                             @endif
                         </div>
        

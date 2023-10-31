@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('picture')->nullable();
-            $table->string('path');
+            $table->string('folder_name');
             $table->foreignId('user_id')->references('id')->on('users');    
             $table->timestamps();
         });

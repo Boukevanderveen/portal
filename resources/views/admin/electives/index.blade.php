@@ -16,6 +16,9 @@
                             Naam
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Code
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Uren
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -34,6 +37,9 @@
                     <tr class="bg-white border-b ">
                         <td class="px-6 py-4">
                             {{$elective->name}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{$elective->code}}
                         </td>
                         <td class="px-6 py-4">
                             {{$elective->hours}}

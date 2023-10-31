@@ -12,7 +12,7 @@ class UpdateWebsiteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::User()->isAdmin;
+        return true;
     }
 
     /**

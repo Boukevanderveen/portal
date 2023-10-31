@@ -27,6 +27,9 @@
                         <th scope="col" class="px-6 py-3">
                             Gemaakt op:
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Inschrijvingen
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +50,11 @@
                         <td class="px-6 py-4">
                             {{ $test->created_at->format('d-m-Y')}}
                         </td>
+                        <td class="px-6 py-4">
+                            @if($test->registerable) Toegestaan @else Niet toegestaan @endif
+                        </td>
                         <td>
+
                             <form method="post" action="{{ route('admin.tests.destroy', $test) }}"> @csrf
                                 @method('delete')
                             <button type="submit"
@@ -57,6 +64,8 @@
 
                             <a href="{{ route('admin.tests.edit', $test) }}">
                                 <i class="fa fa-pencil float-right mr-5" aria-hidden="true"></i>
+                            </a>
+                            <a @if($test->registerable) href="{{route('admin.tests.registrations.index', $test)}}" @endif class="fa-solid fa-user-group @if(!$test->registerable)text-slate-600 @endif">
                             </a>
                         </form>
 

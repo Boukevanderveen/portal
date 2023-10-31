@@ -56,6 +56,11 @@ return [
             'throw' => false,
         ],
 
+        'websites' => [
+            'driver' => 'local',
+            'root'   => 'C:\xampp\htdocs\portal_websites',
+        ],
+
     ],
 
     /*
