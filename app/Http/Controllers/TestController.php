@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Test;
 use App\Models\User;
 use App\Models\Test_User;
+use App\Models\Projectweek;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTestRequest;
 use App\Http\Requests\UpdateTestRequest;
@@ -12,11 +13,12 @@ use Auth;
 class TestController extends Controller
 {
     function index(Test $test){
-        return view('tests.index', ['tests' => Test::whereYear('date', date("Y"))->get(), 'currentyear' => 1]);
+
+        return view('tests.index', ['tests' => Test::whereYear('date', date("Y"))->get(), 'projectweeks' => Projectweek::whereYear('start_date', date("Y"))->get(), 'currentyear' => 1]);
     }
 
     function indexLastYear(Test $test){
-        return view('tests.index', ['tests' => Test::whereYear('date', date("Y")-1)->get(), 'currentyear' => 0]);
+        return view('tests.index', ['tests' => Test::whereYear('date', date("Y")-1)->get(), 'projectweeks' => Projectweek::whereYear('start_date', date("Y")-1)->get(), 'currentyear' => 0]);
     }
 
     function registrationsStore(Request $request, Test $test)

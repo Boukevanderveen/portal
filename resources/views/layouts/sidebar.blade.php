@@ -58,6 +58,12 @@
                <span class="flex-1 ml-3 whitespace-nowrap ">Projecten</span>
             </a>
          </li>
+         <li>
+            <a href="{{ route('admin.projectweeks.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+               <i class="fa fa-calendar" aria-hidden="true"></i>
+               <span class="flex-1 ml-3 whitespace-nowrap ">Projecten weken</span>
+            </a>
+         </li>
       
         </ul>
     </div>

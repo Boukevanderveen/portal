@@ -10,6 +10,7 @@ use App\Http\Controllers\ElectiveController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectWeekController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,22 @@ Route::middleware(['auth'])->group(function () {
             {
                 Route::post('store', [TestController::class, 'registrationsStore'])->name('store');
                 Route::delete('destroy', [TestController::class, 'registrationsDestroy'])->name('destroy');
+            });
+        });
+    });
+
+    Route::group([ 'prefix' => 'projectweeks', 'as' => 'projectweeks.'], function ()
+    {
+        Route::get('', [ProjectWeekController::class, 'index'])->name('index');
+        Route::get('lastyear', [ProjectWeekController::class, 'indexLastYear'])->name('lastyear');
+
+        Route::group([ 'prefix' => '{projectweek}'], function ()
+        {
+            Route::get('show', [ProjectWeekController::class, 'show'])->name('show');
+            Route::group([ 'prefix' => 'registrations', 'as' => 'registrations.'], function ()
+            {
+                Route::post('store', [ProjectWeekController::class, 'registrationsStore'])->name('store');
+                Route::delete('destroy', [ProjectWeekController::class, 'registrationsDestroy'])->name('destroy');
             });
         });
     });
@@ -177,6 +194,31 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
         });
 
         Route::get('search', [TestController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'projectweeks', 'as' => 'projectweeks.'], function ()
+    {
+        Route::get('', [ProjectWeekController::class, 'adminIndex'])->name('index');
+        Route::get('create', [ProjectWeekController::class, 'create'])->name('create');
+        Route::post('store', [ProjectWeekController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{projectweek}'], function ()
+        {
+            Route::delete('destroy', [ProjectWeekController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [ProjectWeekController::class, 'edit'])->name('edit');
+            Route::post('update', [ProjectWeekController::class, 'update'])->name('update');
+
+            Route::group([ 'prefix' => 'registrations', 'as' => 'registrations.'], function ()
+            {
+                Route::get('', [ProjectWeekController::class, 'registrationsIndex'])->name('index');
+                Route::post('store', [ProjectWeekController::class, 'adminRegistrationsStore'])->name('store');
+                Route::group([ 'prefix' => '{registration}'], function (){
+                Route::delete('destroy', [ProjectWeekController::class, 'adminRegistrationsDestroy'])->name('destroy');
+                });
+            });
+        });
+
+        Route::get('search', [ProjectWeekController::class, 'searchIndex'])->name('search');
     });
 
     Route::group([ 'prefix' => 'trips', 'as' => 'trips.'], function ()
