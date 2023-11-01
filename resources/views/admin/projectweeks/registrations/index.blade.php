@@ -2,10 +2,12 @@
 @section('content')
     <div class="grid grid-cols-1 gap-4">
         <div class="text-3xl col-start-1 col-span-1">
-            {{ $test->name }}
+            {{ $projectweek->name }}
             <button data-modal-target="manage-modal" data-modal-toggle="manage-modal" type="button"
-                class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Beheer inschrijvingen</button>
+                class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Beheer inschrijvingen
+            </button>
         </div>
+
         <div class="max-w-full  overflow-hidden shadow-lg">
             <div class="relative  row-start-2 row-span-1 border">
                 <table class="w-full text-sm text-left ">
@@ -21,7 +23,7 @@
                         <tr class="bg-white border-b ">
                             <td class="px-6 py-4">
                                 {{$registration->user->name}}
-                                <form method="post" action="{{ route('admin.tests.registrations.destroy', [$test, $registration]) }}"> @csrf
+                                <form method="post" action="{{ route('admin.projectweeks.registrations.destroy', [$projectweek, $registration]) }}"> @csrf
                                     @method('delete')
                                 <button type="submit"
                                 onclick="return confirm('Weet je zeker dat je {{ $registration->user->name }} wilt uitschrijven?')" role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
@@ -57,7 +59,7 @@
                     </button>
                     <div class="px-6 py-6 lg:px-8">
                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Beheer inschrijvingen</h3>
-                        <form class="space-y-6" method="POST" action="{{ route('admin.tests.registrations.store', $test) }}">
+                        <form class="space-y-6" method="POST" action="{{ route('admin.projectweeks.registrations.store', $projectweek) }}">
                         @csrf
 
                             <div>

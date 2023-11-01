@@ -5,14 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
 
-class StoreProjectRequest extends FormRequest
+class UpdateProjectWeekRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::User()->isAdmin;
     }
 
     /**
@@ -24,7 +24,6 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'name' => 'required|max:55',
-            'school_year' => 'required|numeric|max:4|min:1',
             'period' => 'required|max:10',
             'week' => 'required',
             'start_date' => 'required',

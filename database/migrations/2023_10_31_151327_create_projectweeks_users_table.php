@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projectweeks', function (Blueprint $table) {
+        Schema::create('projectweeks_users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('projectweek_id')->references('id')->on('projectweeks');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
-            $table->string('name');
-            $table->string('period');
-            $table->string('week');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('target_class');
-            $table->boolean('registerable');
         });
     }
 
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projectweeks');
+        Schema::dropIfExists('projectweeks_users');
     }
 };

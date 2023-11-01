@@ -4,8 +4,10 @@
         <div class="text-3xl col-start-1 col-span-1">
             {{ $test->name }}
             <button data-modal-target="manage-modal" data-modal-toggle="manage-modal" type="button"
-                class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Beheer inschrijvingen</button>
+                class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nieuwe
+                toets</button>
         </div>
+
         <div class="max-w-full  overflow-hidden shadow-lg">
             <div class="relative  row-start-2 row-span-1 border">
                 <table class="w-full text-sm text-left ">
@@ -68,7 +70,7 @@
                                         <option selected value="{{$registration->user_id}}">{{$registration->user->name}}</option>
                                         @endforeach
                                         @foreach($users as $user)
-                                        @if(!$registrations->contains('user_id', $user->id))
+                                        @if($registrations->contains('user_id', $user->id))
                                         <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endif
                                         @endforeach
