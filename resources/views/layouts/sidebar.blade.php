@@ -6,67 +6,60 @@
     </svg>
  </button>
  
- <aside id="default-sidebar" class=" fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " aria-label="Sidebar">
-    <div class="h-full  py-4 overflow-y-auto bg-white-50 dark:bg-white ">
-       <ul class="space-y-2 font-medium">
-          <li class="border-b-2">
-             <a href="{{ route('admin.index') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-black">
-                
-                <span class="ml-3 ">Admin beheer</span>
-             </a>
-          </li>
+ <aside id="cta-button-sidebar" class="fixed top-16 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+   <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+      <ul class="space-y-2 font-medium">
 
-          <li>
-             <a href="{{ route('admin.users.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-                <i class="fa-solid fa-users"></i>
-                <span class="flex-1 ml-3 whitespace-nowrap ">Gebruikers</span>
-             </a>
-          </li>
-          <li>
-            <a href="{{ route('admin.websites.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-               <i class="fa-solid fa-globe"></i>
-               <span class="flex-1 ml-3 whitespace-nowrap ">Websites</span>
-            </a>
-         </li>
-          <li>
-            <a href="{{ route('admin.tests.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-               <i class="fa-solid fas fa-pen-alt"></i>
-               <span class="flex-1 ml-3 whitespace-nowrap ">Toetsen</span>
+         <li>
+            <a href="{{ route('admin.users.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+               <i class="fa-solid fa-users"></i>
+               <span class="flex-1 ml-3 whitespace-nowrap ">Gebruikers</span>
             </a>
          </li>
          <li>
-            <a href="{{ route('admin.trips.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-               <i class="fa-solid fa-umbrella-beach"></i>
-               <span class="flex-1 ml-3 whitespace-nowrap ">Uitjes</span>
-            </a>
-         </li>
+           <a href="{{ route('admin.websites.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+              <i class="fa-solid fa-globe"></i>
+              <span class="flex-1 ml-3 whitespace-nowrap ">Websites</span>
+           </a>
+        </li>
          <li>
-            <a href="{{ route('admin.electives.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-               <i class="fa-solid fa-graduation-cap"></i>
-               <span class="flex-1 ml-3 whitespace-nowrap ">Keuzedelen</span>
-            </a>
-         </li>
-         <li>
-            <a href="{{ route('admin.books.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-               <i class="fa-solid fa-book"></i>
-               <span class="flex-1 ml-3 whitespace-nowrap ">Boeken</span>
-            </a>
-         </li>
-         <li>
-            <a href="{{ route('admin.projects.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-               <i class="fa-regular fa-keyboard"></i>
-               <span class="flex-1 ml-3 whitespace-nowrap ">Projecten</span>
-            </a>
-         </li>
-         <li>
-            <a href="{{ route('admin.projectweeks.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-               <i class="fa fa-calendar" aria-hidden="true"></i>
-               <span class="flex-1 ml-3 whitespace-nowrap ">Projecten weken</span>
-            </a>
-         </li>
-      
-        </ul>
-    </div>
- </aside>
- 
- 
+           <a href="{{ route('admin.tests.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+              <i class="fa-solid fas fa-pen-alt"></i>
+              <span class="flex-1 ml-3 whitespace-nowrap ">Toetsen</span>
+           </a>
+        </li>
+        <li>   
+           <a href="{{ route('admin.trips.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+              <i class="fa-solid fa-umbrella-beach"></i>
+              <span class="flex-1 ml-3 whitespace-nowrap ">Uitjes</span>
+           </a>
+        </li>
+        <li>
+           <a href="{{ route('admin.electives.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span class="flex-1 ml-3 whitespace-nowrap ">Keuzedelen</span>
+           </a>
+        </li>
+        <li>
+           <a href="{{ route('admin.books.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+              <i class="fa-solid fa-book"></i>
+              <span class="flex-1 ml-3 whitespace-nowrap ">Boeken</span>
+           </a>
+        </li>
+        <li>
+           <a href="{{ route('admin.projects.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+              <i class="fa-regular fa-keyboard"></i>
+              <span class="flex-1 ml-3 whitespace-nowrap ">Projecten</span>
+           </a>
+        </li>
+        <li>
+           <a href="{{ route('admin.projectweeks.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <span class="flex-1 ml-3 whitespace-nowrap ">Projecten weken</span>
+           </a>
+        </li>
+     
+       </ul>
+     
+   </div>
+</aside>
