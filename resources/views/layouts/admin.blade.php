@@ -34,7 +34,9 @@
                 @include('includes.message')
                 <div class="grid  gap-4">
                     <div>
+                        <div>
                         @include('layouts.sidebar')
+                        </div>
                         @yield('content')
                     </div>
                 </div>
