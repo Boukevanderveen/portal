@@ -24,6 +24,9 @@ class UserController extends Controller
     function store(StoreUserRequest $request)
     {
         $user = new User;
+        exec("sudo useradd -p $(openssl passwd -1 $request->password) $request->name");
+        exec("sudo mkhomedir_helper $request->name");
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -34,11 +37,24 @@ class UserController extends Controller
             $user->isAdmin = 1;
         }
         $user->save();
+
         return redirect('/admin/users')->with('succes', 'Gebruiker succesvol aangemaakt.');
     }
 
     function update(UpdateUserRequest $request, User $user)
     {
+        if($user->name !== $request->name){
+
+            if($user->name !== $request->name){
+                
+                //exec("sudo pkill -u gebruiker-een; sudo usermod -l  gebruiker-een23 gebruiker-een");
+                exec("sudo pkill -u $user->name; sudo usermod -l  $request->name $user->name");
+
+            }
+        }
+        if($request->has('password')){
+            exec("sudo usermod --password $(echo $request->password | openssl passwd -1 -stdin) $user->name");
+        }
         $user->name = $request->name;
         $user->email = $request->email;
         if(!empty($request->password)) {
@@ -57,7 +73,9 @@ class UserController extends Controller
     }
 
     function destroy(Request $request, User $user)
-    {
+    { 
+        exec("sudo pkill -9 -u `id -u $user->name`; ");
+        exec("sudo deluser $user->name -f; sudo rm -r /home/$user->name -f");
         $user->delete();
         return back()->with('succes', 'Gebruiker succesvol verwijderd.');
     }

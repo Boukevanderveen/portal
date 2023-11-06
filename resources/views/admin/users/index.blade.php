@@ -49,7 +49,7 @@
                             <form method="post" action="{{ route('admin.users.destroy', $user) }}"> @csrf
                                 @method('delete')
                             <button type="submit"
-                            onclick="return confirm('Weet je zeker dat je {{ $user->name }} wilt verwijderen?')" role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
+                            onclick="return confirm('Weet je zeker dat je {{ $user->name }} wilt verwijderen?. Hiermee worden alle bestanden en de gebruiker zelf op Linux permanent verwijderd.')" role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
                                
                             </button>
 
