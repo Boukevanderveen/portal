@@ -32,8 +32,11 @@ Route::middleware(['auth'])->group(function () {
         return view('index');
     })->name('index');
 
-    Route::group([ 'prefix' => 'mywebsites', 'as' => 'mywebsites.'], function ()
+
+    Route::group([ 'prefix' => 'websites', 'as' => 'websites.'], function ()
     {
+        Route::get('personal', [WebsiteController::class, 'indexPersonal'])->name('personal');
+
         Route::get('', [WebsiteController::class, 'index'])->name('index');
         Route::get('create', [WebsiteController::class, 'create'])->name('create');
         Route::post('store', [WebsiteController::class, 'store'])->name('store');

@@ -24,8 +24,7 @@ class StoreWebsiteRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:55|unique:users',
-            'description' => 'nullable|max:2555',
-            'file' => 'required|mimes:zip|max:8000',
+            'link' => 'required|max:255',
         ];
     }
 
@@ -34,11 +33,8 @@ class StoreWebsiteRequest extends FormRequest
         return [
             'name.required' => 'Het veld naam is verplicht',
             'name.max' => 'De naam mag niet meer dan :max karakters bevatten',
-            'name.min' => 'De naam moet meer dan :min karakters bevatten',
-            'description.max' => 'De beschrijving mag niet meer dan :max karakters bevatten',
-            'file.required' => 'Het veld bestand is verplicht',
-            'file.mimes' => 'Het bestand dient een zip te zijn',
-            'file.max' => 'Het bestand dient minder dan 1MB te zijn',
+            'link.required' => 'Het veld link is verplicht',
+            'link.max' => 'De link mag niet meer dan :max karakters bevatten',
         ];
     }
 }

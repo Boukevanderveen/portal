@@ -24,14 +24,11 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'name' => 'required|max:55',
-            'school_year' => 'required|numeric|max:4|min:1',
-            'period' => 'required|max:10',
-            'week' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'target_class' => 'required',
-
-        ];  
+            'link' => 'required|max:255',
+            'picture.mimes' => 'De afbeelding moet van type jpeg, png, jpg, gif of svg zijn',
+            'picture.max' => 'De afbeelding mag niet groter dan 16mb zijn',
+            'picture.image' => 'Het het veld afbeelding moet een afbeelding bevatten',
+        ];
     }
 
     public function messages(): array
@@ -39,13 +36,11 @@ class StoreProjectRequest extends FormRequest
         return [
             'name.required' => 'De naam is verplicht',
             'name.max' => 'De naam mag niet meer dan :max karakters bevatten',
-            'period.required' => 'De periode is verplicht',
-            'period.max' => 'De periode mag niet meer dan :max karakters bevatten',
-            'week.required' => 'De week is verplicht',
-            'week.max' => 'De week mag niet meer dan :max karakters bevatten',
-            'start_date.required' => 'De start-datum is verplicht',
-            'end_date.required' => 'De eind=datum is verplicht',
-            'target_class.required' => 'De doelgroep is verplicht',
+            'link.required' => 'De link is verplicht',
+            'link.max' => 'De link mag niet meer dan :max karakters bevatten',
+            'picture.mimes' => 'De afbeelding moet van type jpeg, png, jpg, gif of svg zijn',
+            'picture.max' => 'De afbeelding mag niet groter dan 16mb zijn',
+            'picture.image' => 'Het het veld afbeelding moet een afbeelding bevatten',
         ];
     }
 }

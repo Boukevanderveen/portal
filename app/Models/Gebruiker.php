@@ -14,5 +14,8 @@ class Gebruiker extends Model
 
         protected $fillable = [
             'name',
+            'email',
+            'password',
+            'isAdmin'
         ];
 }

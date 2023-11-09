@@ -19,10 +19,13 @@
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Leerling
-                            </th>  
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Zichtbaarheid
+                            </th>
                             <th scope="col" class="px-6 py-3">
                                 Aangemaakt op:
-                            </th>  
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +38,14 @@
                                     {{ $website->user->name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $website->created_at->format('d-m-Y')}}
+                                    @if($website->isPublic)
+                                    Privé
+                                    @else
+                                    Publiek
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $website->created_at->format('d-m-Y') }}
                                 </td>
                                 <td>
                                     <form method="post" action="{{ route('admin.websites.destroy', $website) }}"> @csrf
@@ -50,7 +60,8 @@
                                             <i class="fa fa-pencil float-right mr-5" aria-hidden="true"></i>
                                         </a>
 
-                                        <a target="_blank" href="http://localhost/portal_websites/{{$website->user_id}}/{{$website->folder_name}}">
+                                        <a target="_blank"
+                                            href="{{ $website->link }}">
                                             <i class="fa-solid fa-globe float-right mr-5" aria-hidden="true"></i>
                                         </a>
                                     </form>
@@ -64,7 +75,6 @@
             </div>
         </div>
     </div>
-
-
     </div>
+    {{ $websites->links() }}
 @endsection

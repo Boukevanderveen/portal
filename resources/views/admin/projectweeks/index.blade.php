@@ -92,4 +92,5 @@
 
 
     </div>
+    {{$projectweeks->links()}}
 @endsection

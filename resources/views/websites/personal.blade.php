@@ -2,7 +2,7 @@
 @section('content')
     <div class="grid grid-cols-1 gap-4">
         <div class="text-3xl col-start-1 col-span-1">
-            Websites
+            Mijn websites
             <button onclick="window.location='{{ route('websites.create') }}'" type="button"
                 class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nieuwe
                 website</button>
@@ -18,10 +18,16 @@
                     </a>
                     <div class="p-5">
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $website->name }}</h6>
-
+                        @if(!$website->isPublic)
+                        <p class="mb-1 text-red-500">Privé</p>
+                        @else
+                        <p class="mb-1 text-green-500">Publiek</p>
+                        @endif
 
                         <p class="mb-1 text-gray-500">{{ $website->created_at->format('d-m-Y')}}</p>
-                       
+                        <p class="mb-1 text-gray-500"><i class="fa fa-envelope" aria-hidden="true"></i>
+
+                            <a href="mailto:?&subject={{$website->name}}&body={{$website->link}}">Stuur email</a></p>
 
                         <a target="_blank"
                             href="{{ $website->link }}"
@@ -33,7 +39,9 @@
                                     d="M1 5h12m0 0L9 1m4 4L9 9" />
                             </svg>
                         </a>
-                       
+                        <a href="{{ route('websites.edit', $website) }}"class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                            Bewerk
+                        </a>
                     </div>
                 </div>
             @endforeach

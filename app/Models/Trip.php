@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Trip extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'school_year',
+        'date',
+        'time',
+        'location',
+    ];
 }

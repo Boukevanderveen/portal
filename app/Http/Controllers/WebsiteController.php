@@ -17,8 +17,12 @@ use DB;
 class WebsiteController extends Controller
 {
 
+    function indexPersonal(Website $website){
+        return view('websites.personal', ['websites' => Website::where('user_id', Auth::User()->id)->get()]);
+    } 
+
     function index(Website $website){
-        return view('websites.index', ['websites' => Website::where('user_id', Auth::User()->id)->get()]);
+        return view('websites.index', ['websites' => Website::where('isPublic', 1)->get()]);
     } 
 
     function edit(Website $website){
@@ -35,7 +39,7 @@ class WebsiteController extends Controller
     function update(UpdateWebsiteRequest $request, Website $website)
     {
         $this->authorize('update', $website);
-
+        /*
         $website->name = $request->name;
         $website->description = $request->description;
         if ($request->hasFile('file')) 
@@ -54,12 +58,17 @@ class WebsiteController extends Controller
             $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
 
         }
+        */
+        $website->name = $request->name;
+        $website->link = $request->link;
+        $website->isPublic = $request->isPublic;
         $website->update();
-        return redirect('/mywebsites')->with('succes', 'Website succesvol bewerkt.');
+        return redirect('/websites/personal')->with('succes', 'Website succesvol bewerkt.');
     }
 
     function store(StoreWebsiteRequest $request)
     {
+        /*
         $website = new Website;
         $website->name = $request->name;
         $website->description = $request->description;
@@ -79,20 +88,29 @@ class WebsiteController extends Controller
 
         $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
         $website->save();
-        return redirect('/mywebsites')->with('succes', 'Website succesvol aangemaakt.');
+        */
+        $website = new Website;
+        $website->name = $request->name;
+        $website->link = $request->link;
+        $website->isPublic = $request->isPublic;
+        $website->user_id = Auth::User()->id;
+        $website->save();
+        return redirect('/websites/personal')->with('succes', 'Website succesvol aangemaakt.');
     }
 
     function destroy(Request $request, Website $website)
     {
         $this->authorize('delete', $website);
-        File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
+        
+        //File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
         $website->delete();
-        return redirect('mywebsites')->with('succes', 'Website succesvol verwijderd.');
+        
+        return redirect('websites/personal')->with('succes', 'Website succesvol verwijderd.');
     }
     
     function adminIndex(Website $website){
         $this->authorize('view', $website);
-        return view('admin.websites.index', ['websites' => Website::All()]);
+        return view('admin.websites.index', ['websites' => Website::Paginate(10)]);
     }   
     
     function adminCreate(Website $website){
@@ -110,12 +128,9 @@ class WebsiteController extends Controller
     function adminStore(StoreWebsiteRequest $request)
     {
 
-        
+        /*
         if ($request->hasFile('db')) 
         {
-
-
-
         $dbFileName = $request->db->getClientOriginalName();
         $dbFilePath = Storage::disk('websites')->path('db_exports/'.$dbFileName.'');
         Storage::disk('websites')->putFileAs('db_exports', $request->file('db'), $dbFileName);
@@ -144,12 +159,19 @@ class WebsiteController extends Controller
         }
 
         $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
+        */
+        $website = new Website;
+        $website->name = $request->name;
+        $website->link = $request->link;
+        $website->isPublic = $request->isPublic;
+        $website->user_id = Auth::User()->id;
         $website->save();
         return redirect('/admin/websites')->with('succes', 'Website succesvol aangemaakt.');
     }
 
     function adminUpdate(UpdateWebsiteRequest $request, Website $website)
     {
+        /*
         $website->name = $request->name;
         $website->description = $request->description;
         $website->user_id = $request->student_id;
@@ -169,6 +191,10 @@ class WebsiteController extends Controller
             $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
 
         }
+        */
+        $website->name = $request->name;
+        $website->link = $request->link;
+        $website->isPublic = $request->isPublic;
         $website->update();
         return redirect('/admin/websites')->with('succes', 'Website succesvol bewerkt.');
     }
@@ -176,7 +202,7 @@ class WebsiteController extends Controller
     function adminDestroy(Request $request, Website $website)
     {
         $this->authorize('delete', $website);
-        File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
+        //File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
         $website->delete();
         return back()->with('succes', 'Website succesvol verwijderd.');
     }

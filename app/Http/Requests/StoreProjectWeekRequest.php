@@ -24,7 +24,7 @@ class StoreProjectWeekRequest extends FormRequest
     {
         return [
             'name' => 'required|max:55',
-            'period' => 'required|max:10',
+            'period' => 'required|max:55',
             'week' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',

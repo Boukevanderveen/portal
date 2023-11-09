@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('school_year');
-            $table->integer('period');
+            $table->string('period');
             $table->date('date');
             $table->time('time');
             $table->date('resit_date')->nullable();

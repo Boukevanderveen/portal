@@ -16,7 +16,7 @@ class BookController extends Controller
 
     function adminIndex(Book $book){
         $this->authorize('view', $book);
-        return view('admin.books.index', ['books' => Book::All()]);
+        return view('admin.books.index', ['books' => Book::Paginate(10)]);
     }
     
     function create(Book $book){

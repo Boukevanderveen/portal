@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('websites', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('picture')->nullable();
-            $table->string('folder_name');
+            $table->string('link');
+            $table->boolean('isPublic')->default(null);
             $table->foreignId('user_id')->references('id')->on('users');    
             $table->timestamps();
         });
