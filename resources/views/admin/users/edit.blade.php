@@ -14,7 +14,7 @@
 
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                                Naam
+                                <span id="name_label">Naam</span>
                             </label>
                             <input
                             value="{{old('name', $user->name)}}" class="shadow appearance-none border @error('name') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -43,7 +43,6 @@
                                 <option value="1" @if(old('privileges') !== null && old('privileges') == 1) selected @else @if(null == old('privileges') && $user->isStudent) selected @endif @endif >Student</option>
                                 <option value="2" @if(old('privileges') !== null && old('privileges') == 2) selected @else @if(null == old('privileges') && $user->isAdmin) selected @endif @endif >Admin</option>
                             </select>
-
                         </div>
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -66,4 +65,30 @@
             </form>
         </div>
     </div>
+    <script>
+        setInterval(function() {
+            if(document.getElementById("privileges").value == 0){
+                document.getElementById('email').removeAttribute('readonly');
+                document.getElementById("name_label").textContent = "Naam"
+            }
+            if(document.getElementById("privileges").value == 1){
+                document.getElementById("email").readOnly = true;
+    
+                if(document.getElementById("name").value == ""){
+                document.getElementById("email").value = ""
+                }
+                else{
+                    document.getElementById("email").value = document.getElementById("name").value +
+                    "@edu.rocfriesepoort.nl";
+                }
+                document.getElementById("name_label").textContent = "Leerlingnummer"
+    
+            }
+            if(document.getElementById("privileges").value == 2){
+                document.getElementById('email').removeAttribute('readonly');
+                document.getElementById("name_label").textContent = "Naam"
+    
+            }
+        }, 1000);
+    </script>
 @endsection

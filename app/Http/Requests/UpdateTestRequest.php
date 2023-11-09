@@ -25,7 +25,7 @@ class UpdateTestRequest extends FormRequest
         return [
             'name' => 'required|max:55',
             'school_year' => 'required|numeric|max:4|min:1',
-            'period' => 'required|numeric|max:4|min:1',
+            'period' => 'required|max:55',
             'date' => 'required',
             'time' => 'required',
         ];
@@ -41,9 +41,7 @@ class UpdateTestRequest extends FormRequest
             'school_year.max' => 'Het schooljaar mag niet hoger zijn dan :max',
             'school_year.min' => 'Het schooljaar mag niet lager zijn dan :min',
             'period.required' => 'De periode is verplicht',
-            'period.numeric' => 'De periode mag alleen cijfers bevatten',
             'period.max' => 'De periode mag niet meer hoger dan :max zijn',
-            'period.min' => 'De periode mag niet meer lager dan :min zijn',
             'time.required' => 'De tijd is verplicht',    
             'date.required' => 'De datum is verplicht',
 

@@ -38,7 +38,7 @@ class TestController extends Controller
 
     function adminIndex(Test $test){
         $this->authorize('view', $test);
-        return view('admin.tests.index', ['tests' => Test::All()]);
+        return view('admin.tests.index', ['tests' => Test::Paginate(10)]);
     }
     
     function create(Test $test){

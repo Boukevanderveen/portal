@@ -16,7 +16,7 @@ class ElectiveController extends Controller
 
     function adminIndex(Elective $elective){
         $this->authorize('view', $elective);
-        return view('admin.electives.index', ['electives' => Elective::All()]);
+        return view('admin.electives.index', ['electives' => Elective::Paginate(10)]);
     }
     
     function create(Elective $elective){

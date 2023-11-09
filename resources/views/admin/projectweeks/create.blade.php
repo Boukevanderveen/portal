@@ -33,7 +33,7 @@
                             @if ($errors->has('period'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('period') }}</p>
                             @endif
-                        </div>        
+                        </div>    
 
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="week">

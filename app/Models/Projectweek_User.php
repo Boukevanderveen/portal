@@ -9,6 +9,11 @@ class Projectweek_User extends Model
 {
     protected $table = 'projectweeks_users';
     
+    protected $fillable = [
+        'projectweek_id',
+        'user_id',
+    ];
+
     use HasFactory;
 
     public function test()

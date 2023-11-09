@@ -41,7 +41,7 @@
                             </label>
                             <input
                             value="{{old('period')}}" class="shadow appearance-none border @error('period') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                name="period" id="period" type="number">
+                                name="period" id="period" type="text">
                             @if ($errors->has('period'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('period') }}</p>
                             @endif

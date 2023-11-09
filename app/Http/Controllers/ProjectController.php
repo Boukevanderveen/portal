@@ -19,7 +19,7 @@ class ProjectController extends Controller
 
     function adminIndex(Project $project){
         $this->authorize('view', $project);
-        return view('admin.projects.index', ['projects' => Project::All()]);
+        return view('admin.projects.index', ['projects' => Project::Paginate(10)]);
     }
     
     function create(Project $project){
@@ -60,6 +60,8 @@ class ProjectController extends Controller
         {
             $fileName = time() . '.' . $request->picture->extension();
             $file = $request->file('picture');
+            $path = public_path() . '/images/projects/' . $project->id . '/'. $project->picture .' ';
+            dd(File::delete(public_path('/images/projects/' . $project->id), $fileName));
             $project->picture = $fileName;
         }
         if(isset($file)){

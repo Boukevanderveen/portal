@@ -30,7 +30,7 @@ class ProjectweekController extends Controller
 
     function adminIndex(Projectweek $projectweek){
         $this->authorize('view', $projectweek);
-        return view('admin.projectweeks.index', ['projectweeks' => Projectweek::All()]);
+        return view('admin.projectweeks.index', ['projectweeks' => Projectweek::Paginate(10)]);
     }
     
     function create(Projectweek $projectweek){
@@ -75,7 +75,7 @@ class ProjectweekController extends Controller
 
     function registrationsIndex(Projectweek $projectweek){
         $this->authorize('view', $projectweek);
-        $registrations = Projectweek_user::where('projectweek_id', $projectweek->id)->get(); 	    
+        $registrations = Projectweek_user::where('projectweek_id', $projectweek->id)->paginate(10); 	    
         $users = User::All();
         return view('admin.projectweeks.registrations.index', compact(['projectweek', 'users', 'registrations']));
     }

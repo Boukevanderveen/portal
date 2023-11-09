@@ -28,7 +28,7 @@ class UpdateElectiveRequest extends FormRequest
             'description' => 'required|max:2555',
             'hours' => 'required|numeric|max:2000',
             'teacher' => 'required:max:55',
-            'period' => 'required|numeric|max:4|min:1',
+            'period' => 'required|max:55',
             'code' => 'nullable|numeric',
         ];
     }
@@ -46,10 +46,7 @@ class UpdateElectiveRequest extends FormRequest
             'teacher.required' => 'De docent is verplicht',  
             'teacher.max' => 'De docent mag niet meer dan :max karakter zijn',    
             'period.required' => 'De periode is verplicht',
-            'period.numeric' => 'De periode mag alleen cijfers bevatten',
             'period.max' => 'De periode mag niet meer hoger dan :max zijn',
-            'period.min' => 'De periode mag niet meer lager dan :min zijn',
-            
             'code.numeric' => 'De code mag alleen cijfers bevatten',    
         ];
     }

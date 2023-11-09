@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('hours');
             $table->string('teacher');
             $table->text('description');
-            $table->integer('period');
+            $table->string('period');
             $table->timestamps();
         });
     }
