@@ -25,55 +25,65 @@ class UserController extends Controller
     {
         $user = new User;
         if($request->privileges == 1){
-        exec("sudo useradd -p $(openssl passwd -1 $request->password) fp-$request->name");
+        exec("sudo useradd -p $(openssl passwd -1 $request->password) fp-$request->name 2>&1", $output, $return_var);
         exec("sudo mkhomedir_helper fp-$request->name");
+        $user->isStudent = 1;
         }
         if($request->privileges == 2){
-            exec("sudo useradd -p $(openssl passwd -1 $request->password) fp-$request->name");
-            exec("sudo mkhomedir_helper fp-$request->name");
-            exec("sudo usermod -a -G sudo fp-$request->name");
-        }
-        $user->name = $name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        if($request->privileges == 1){
-            $user->isStudent = 1;
-        }
-        else if($request->privileges == 2){
+            exec("sudo useradd -p $(openssl passwd -1 $request->password) $request->name 2>&1", $output, $return_var);
+            exec("sudo mkhomedir_helper $request->name");
+            exec("sudo usermod -a -G sudo $request->name");
             $user->isAdmin = 1;
         }
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+
         $user->save();
         return redirect('/admin/users')->with('succes', 'Gebruiker succesvol aangemaakt.');
     }
 
     function update(UpdateUserRequest $request, User $user)
     {
-        if($request->privileges == 1 && $user->privileges == 2){
+        if($request->privileges == 1 ){
+            $name = "fp-$request->name";
+            if($user->isStudent){
+            exec("sudo killall -u fp-$user->name`; ");
             exec("sudo pkill -9 -u `id -u fp-$user->name`; ");
-            exec("sudo deluser fp-$user->name sudo");
-        }
-        else if($request->privileges == 2 && $user->privileges == 1){
-            exec("sudo pkill -9 -u `id -u fp-$user->name`; ");
-            exec("sudo usermod -a -G sudo fp-$request->name");
-        }
-        if($user->name !== $request->name){
-            exec("sudo pkill -u fp-$user->name; sudo usermod -l  fp-$request->name fp-$user->name");
-        }
-        if($request->has('password')){
-            exec("sudo usermod --password $(echo $request->password | openssl passwd -1 -stdin) $user->name");
-        }
-        $user->name = $request->name;
-        $user->email = $request->email;
-        if(!empty($request->password)) {
-        $user->password = bcrypt($request->password);
-        }
-        if($request->privileges == 1){
+            exec("sudo usermod -l fp-$request->name fp-$user->name");
+            }
+            else{
+                exec("sudo killall -u $user->name`; ");
+                exec("sudo pkill -9 -u `id -u $user->name`; ");
+                exec("sudo usermod -l $name $user->name");
+            }
             $user->isStudent = 1;
             $user->isAdmin = 0;
+            $user->name = $request->name;
+            exec("sudo deluser $name sudo");
+            if(isset($request->password)){
+                exec("sudo usermod --password $(echo $request->password | openssl passwd -1 -stdin) $name");
+            }
         }
-        else if($request->privileges == 2){
-            $user->isAdmin = 1;
+        else if($request->privileges == 2 ){
+            if($user->isAdmin){
+                exec("sudo pkill -9 -u `id -u $user->name`; ");
+                exec("sudo usermod -l $request->name $user->name");
+                }
+                else{
+                    exec("sudo killall -u fp-$user->name`; ");
+                    exec("sudo pkill -9 -u `id -u fp-$user->name`; ");
+                    exec("sudo usermod -l $request->name fp-$user->name");
+                }
             $user->isStudent = 0;
+            $user->isAdmin = 1;
+            $user->name = $request->name;
+            exec("sudo usermod -a -G sudo $user->name");
+        }
+
+        $user->email = $request->email;
+        if(isset($request->password)){
+            exec("sudo usermod --password $(echo $request->password | openssl passwd -1 -stdin) $user->name");
         }
         $user->update();
         return redirect('/admin/users')->with('succes', 'Gebruiker succesvol bewerkt.');
@@ -81,8 +91,16 @@ class UserController extends Controller
 
     function destroy(Request $request, User $user)
     { 
-        exec("sudo pkill -9 -u `id -u fp-$user->name`; ");
-        exec("sudo deluser fp-$user->name -f; sudo rm -r /home/fp-$user->name -f");
+        if($user->isAdmin){
+            exec("sudo killall -u $user->name`; ");
+            exec("sudo pkill -9 -u `id -u $user->name`; ");
+            exec("sudo deluser $user->name -f; sudo rm -r /home/$user->name -f");
+        }
+        else{
+            exec("sudo killall -u fp-$user->name`; ");
+            exec("sudo pkill -9 -u `id -u fp-$user->name`; ");
+            exec("sudo deluser fp-$user->name -f; sudo rm -r /home/fp-$user->name -f");
+        }
         $user->delete();
         return back()->with('succes', 'Gebruiker succesvol verwijderd.');
     }
