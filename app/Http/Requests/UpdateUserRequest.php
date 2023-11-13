@@ -22,11 +22,17 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3|max:55|alpha_num|unique:users,name,' . $this->route('user')->id . ',id',
-            'email'=>'required|email|max:255|unique:users,email,' . $this->route('user')->id . ',id',
-            'password' => 'nullable|max:255'
-        ];
+        $rules = [];
+        if ($this->privileges == 2) {
+            $rules['name'] = 'required|regex:/(?=.*[A-Za-z])+/|min:3|max:55|unique:users,name,' . $this->route('user')->id . ',id';
+        }
+        else{
+            $rules['name'] = 'required|numeric|min:3|max:999999|unique:users,name,' . $this->route('user')->id . ',id';
+        }
+
+        $rules['email'] = 'required|email|max:255|unique:users,email,' . $this->route('user')->id . ',id';
+        $rules['password'] = 'nullable|max:255';
+        return $rules;
     }
 
     /** 
@@ -36,18 +42,20 @@ class UpdateUserRequest extends FormRequest
      */
     public function messages(): array
     {
-        return [
-            
-            'name.required' => 'Het veld naam is verplicht',
-            'name.min' => 'Het veld naam moet minimaal :min letters bevatten',
-            'name.max' => 'Het veld naam mag niet meer dan :max karakters bevatten',
-            'name.alpha_num' => 'De naam mag alleen letters en cijfers bevatten',
-            'name.unique' => 'Deze naam bestaat al',
-            'email.required' => 'Het veld E-mail is verplicht',
-            'email.max' => 'Het veld E-mail mag niet meer dan :max karakters bevatten',
-            'email.unique' => 'Dit E-mail is al in gebruik',
-            'email.email' => 'Het veld E-mail moet een geldige E-mail bevatten',
-            'password.max' => 'Het veld wachtwoord mag niet meer dan :max karakters bevatten',
-        ];
+        $messages = [];
+
+        $messages['name.required'] ='Het veld naam is verplicht';
+        $messages['name.min'] = 'Het veld naam moet minimaal :min letters bevatten';
+        $messages['name.max'] = 'Het veld naam mag niet meer dan :max karakters bevatten';
+        $messages['name.unique'] = 'Deze naam bestaat al';
+        $messages['name.regex'] = 'Voor admins moet de naam moet minimaal een letter bevatten';
+        $messages['name.numeric'] = 'Het leerlingnummer mag alleen cijfers bevatten';
+        $messages['email.required'] = 'Het veld E-mail is verplicht';
+        $messages['email.max'] = 'Het veld E-mail mag niet meer dan :max karakters bevatten';
+        $messages['email.unique'] = 'Dit E-mail is al in gebruik';
+        $messages['email.email'] ='Het veld E-mail moet een geldige E-mail bevatten';
+        $messages['password.max'] = 'Het veld wachtwoord mag niet meer dan :max karakters bevatten';
+        
+        return $messages; 
     }
 }
