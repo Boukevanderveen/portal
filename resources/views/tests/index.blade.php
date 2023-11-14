@@ -96,7 +96,7 @@
                                         {{ $projectweek->name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Periode: {{ $projectweek->period }} {{ date('H:i', strtotime($projectweek->time)) }}
+                                        Periode {{ $projectweek->period }} 
                                     </td>
                                     <td class="px-6 py-4">
                                         Week {{ $projectweek->week }}

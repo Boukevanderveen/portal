@@ -24,7 +24,7 @@ class UpdateTestRequest extends FormRequest
     {
         return [
             'name' => 'required|max:55',
-            'school_year' => 'required|numeric|max:4|min:1',
+            'school_year' => 'required|numeric|max:10|min:1',
             'period' => 'required|max:55',
             'date' => 'required',
             'time' => 'required',

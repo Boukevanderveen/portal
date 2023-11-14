@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('electives', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->decimal('hours');
             $table->string('teacher');
             $table->text('description');

@@ -10,7 +10,6 @@ use App\Http\Requests\UpdateTripRequest;
 class TripController extends Controller
 {
     function index(Trip $trip){
-        $this->authorize('view', $trip);
         $trips1 = Trip::where('school_year', 1)->get();
         $trips2 = Trip::where('school_year', 2)->get();
         $trips3 = Trip::where('school_year', 3)->get();

@@ -94,6 +94,7 @@ class TestController extends Controller
     {
         $this->authorize('create', $test);
         Test_User::where('test_id', $test->id)->delete();
+        if(isset($request->user_ids)){
         foreach($request->user_ids as $user_id){
         if (Test_User::where('user_id', $user_id)->exists()) {
         }
@@ -102,6 +103,7 @@ class TestController extends Controller
             $Test_User->test_id = $test->id;
             $Test_User->user_id = $user_id;
             $Test_User->save();
+        }
         }
         }
         return back()->with('succes', 'Inschrijvingen succesvol bewerkt');

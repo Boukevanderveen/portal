@@ -76,7 +76,7 @@
                             </label>
                             <input
                             value="{{old('code')}}" class="shadow appearance-none border @error('code') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                name="code" id="code" type="number">
+                                name="code" id="code" type="text">
                             @if ($errors->has('code'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('code') }}</p>
                             @endif

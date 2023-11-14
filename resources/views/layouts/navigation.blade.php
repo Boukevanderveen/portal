@@ -57,9 +57,11 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(Auth::User()->isAdmin)
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin')">
                         Admin
                     </x-nav-link>
+                    @endif
                 </div>
                 @auth
                 <x-dropdown align="right" width="48">

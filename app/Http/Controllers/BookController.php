@@ -29,7 +29,7 @@ class BookController extends Controller
         return view('admin.books.edit', compact(['book']));
     }
 
-    function store(Request $request)
+    function store(StoreBookRequest $request)
     {
         $book = new Book;
         $book->name = $request->name;

@@ -6,6 +6,7 @@
             <button data-modal-target="manage-modal" data-modal-toggle="manage-modal" type="button"
                 class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Beheer inschrijvingen</button>
         </div>
+        
         <div class="max-w-full  overflow-hidden shadow-lg">
             <div class="relative  row-start-2 row-span-1 border">
                 <table class="w-full text-sm text-left ">
@@ -17,27 +18,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($registrations as $registration)
-                        <tr class="bg-white border-b ">
-                            <td class="px-6 py-4">
-                                {{$registration->user->name}}
-                                <form method="post" action="{{ route('admin.tests.registrations.destroy', [$test, $registration]) }}"> @csrf
-                                    @method('delete')
-                                <button type="submit"
-                                onclick="return confirm('Weet je zeker dat je {{ $registration->user->name }} wilt uitschrijven?')" role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
-                                   
-                                </button>
-                                    </a>
-                            </form>
-                            </td>
-                        </td>
-                            </td>
-                        </tr>
+                        @foreach ($registrations as $registration)
+                            <tr class="bg-white border-b ">
+                                <td class="px-6 py-4">
+                                    {{ $registration->user->name }}
+                                </td>
+                                <td>
+                                        <form method="post" action="{{ route('admin.tests.registrations.destroy', [$test, $registration]) }}"> @csrf
+                                            @method('delete')
+                                            <button type="submit"
+                                                onclick="return confirm('Weet je zeker dat je {{ $registration->user->name }} wilt verwijderen? Hiermee worden alle bestanden en de gebruiker zelf op Linux permanent verwijderd.')"
+                                                role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
+
+                                            </button>
+
+                                         
+                                        </form>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
         </div>
-    </div>
 
         <!-- Main modal -->
         <div id="manage-modal" tabindex="-1" aria-hidden="true"
@@ -59,7 +62,6 @@
                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Beheer inschrijvingen</h3>
                         <form class="space-y-6" method="POST" action="{{ route('admin.tests.registrations.store', $test) }}">
                         @csrf
-
                             <div>
                                 <label for="user_ids"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingeschrevenen</label>
