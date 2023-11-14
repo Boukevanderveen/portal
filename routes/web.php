@@ -12,7 +12,6 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectWeekController;
 
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -124,9 +123,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],function ()
 {
-    Route::get('', function () {
-        return view('admin.index');
-    })->name('index');
+    Route::get('', [HomeController::class, 'adminIndex'])->name('index');
     
     Route::group([ 'prefix' => 'users', 'as' => 'users.'], function ()
     {

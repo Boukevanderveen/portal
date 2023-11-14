@@ -9,16 +9,19 @@ use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    function index(){
+    function index(User $user){
+        $this->authorize('view', $user);
         return view('admin.users.index', ['users' => User::Paginate(10)]);
     }
     
-    function create(){
+    function create(User $user){
+        $this->authorize('create', $user);
         return view('admin.users.create');
     }
 
     function edit(User $user){
-        return view('admin.users.edit', compact(['user']));
+        $this->authorize('create', $user);
+        return view('admin.edit.edit', compact(['user']));
     }
 
     function store(StoreUserRequest $request)
@@ -62,6 +65,7 @@ class UserController extends Controller
             $user->name = $request->name;
             exec("sudo deluser $name sudo");
             if(isset($request->password)){
+                $user->password = bcrypt($request->password);
                 exec("sudo usermod --password $(echo $request->password | openssl passwd -1 -stdin) $name");
             }
         }
@@ -83,6 +87,7 @@ class UserController extends Controller
 
         $user->email = $request->email;
         if(isset($request->password)){
+            $user->password = bcrypt($request->password);
             exec("sudo usermod --password $(echo $request->password | openssl passwd -1 -stdin) $user->name");
         }
         $user->update();
@@ -91,6 +96,7 @@ class UserController extends Controller
 
     function destroy(Request $request, User $user)
     { 
+        $this->authorize('delete', $user);
         if($user->isAdmin){
             exec("sudo killall -u $user->name`; ");
             exec("sudo pkill -9 -u `id -u $user->name`; ");

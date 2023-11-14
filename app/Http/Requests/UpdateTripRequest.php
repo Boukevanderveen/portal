@@ -24,7 +24,7 @@ class UpdateTripRequest extends FormRequest
     {
         return [
             'name' => 'required|max:55',
-            'school_year' => 'required|numeric|max:4|min:1',
+            'school_year' => 'required|numeric|max:10|min:1',
             'date' => 'required',
             'time' => 'required',
             'location' => 'required',

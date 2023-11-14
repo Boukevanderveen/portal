@@ -41,6 +41,7 @@
                                     {{ $elective->name }}
                                 </td>
                                 <td class="px-6 py-4">
+                                    @if($elective->code == NULL) Geen @endif
                                     {{ $elective->code }}
                                 </td>
                                 <td class="px-6 py-4">

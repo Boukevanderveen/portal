@@ -12,7 +12,7 @@
                         <h6><b >{{ $elective->hours }} uur</b><h6>
                         <h6><b >{{ $elective->teacher }}</b><h6>
                         <h6><b >Periode {{ $elective->period }}</p><h6>
-                        <h6><b >Code: {{ $elective->code }}</b><h6>
+                        <h6><b >Code: @if($elective->code == NULL) Geen @endif {{ $elective->code }}</b><h6>
                         <h6 class="text-gray-500 dark:text-gray-400"> {{ $elective->description }}<h6>
                 </div>
             </div>    

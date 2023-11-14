@@ -25,7 +25,7 @@ class UpdateBookRequest extends FormRequest
             'name' => 'required|max:55',
             'ISBN' => 'required|max:13',
             'price' => 'required|regex:/^[0-9]{1,9}([,.][0-9]{1,9})?$/',
-            'school_year' => 'required|numeric|max:4|min:1',
+            'school_year' => 'required|numeric|max:10|min:1',
         ];
     }
 

@@ -84,6 +84,7 @@ class ProjectweekController extends Controller
     {
         $this->authorize('create', $projectweek);
         Projectweek_User::where('projectweek_id', $projectweek->id)->delete();
+        if(isset($request->user_ids)){
         foreach($request->user_ids as $user_id){
         if (Projectweek_User::where('user_id', $user_id)->exists()) {
         }
@@ -92,6 +93,7 @@ class ProjectweekController extends Controller
             $Projectweek_User->projectweek_id = $projectweek->id;
             $Projectweek_User->user_id = $user_id;
             $Projectweek_User->save();
+        }
         }
         }
         return back()->with('succes', 'Project week succesvol bewerkt');

@@ -52,7 +52,6 @@ class ProjectController extends Controller
 
     function update(UpdateProjectRequest $request, Project $project)
     {
-        // Verwijder folder inhoud waar project id?
         $project->name = $request->name;
         $project->link = $request->link;
 
@@ -61,7 +60,7 @@ class ProjectController extends Controller
             $fileName = time() . '.' . $request->picture->extension();
             $file = $request->file('picture');
             $path = public_path() . '/images/projects/' . $project->id . '/'. $project->picture .' ';
-            dd(File::delete(public_path('/images/projects/' . $project->id), $fileName));
+            //dd(File::delete(public_path('/images/projects/' . $project->id), $fileName));
             $project->picture = $fileName;
         }
         if(isset($file)){

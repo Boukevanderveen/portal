@@ -68,6 +68,7 @@ class WebsiteController extends Controller
 
     function store(StoreWebsiteRequest $request)
     {
+        $this->authorize('create', $website);
         /*
         $website = new Website;
         $website->name = $request->name;
@@ -114,20 +115,19 @@ class WebsiteController extends Controller
     }   
     
     function adminCreate(Website $website){
-        $this->authorize('create', $website);
+        $this->authorize('adminCreate', $website);
         $students = User::where('isStudent', 1)->get();
         return view('admin.websites.create', compact(['students']));
     }
 
     function adminEdit(Website $website){
-        $this->authorize('update', $website);
+        $this->authorize('adminUpdate', $website);
         $students = User::where('isStudent', 1)->get();
         return view('admin.websites.edit', compact(['website', 'students']));
     }
 
     function adminStore(StoreWebsiteRequest $request)
     {
-
         /*
         if ($request->hasFile('db')) 
         {

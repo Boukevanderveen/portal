@@ -38,6 +38,11 @@ class WebsitePolicy
         }
     }
 
+    public function adminCreate(User $user): bool
+    {
+        return Auth::User()->isAdmin;
+    }
+
     /**
      * Determine whether the user can update the model.
      */
@@ -51,6 +56,11 @@ class WebsitePolicy
         }
     }
 
+    public function adminUpdate(User $user, Website $website): bool
+    {
+        return Auth::User()->isAdmin;
+    }
+
     /**
      * Determine whether the user can delete the model.
      */
@@ -61,7 +71,8 @@ class WebsitePolicy
         }
         else{
             return Auth::User()->isAdmin;
-        }    }
+        }    
+    }
 
     /**
      * Determine whether the user can restore the model.

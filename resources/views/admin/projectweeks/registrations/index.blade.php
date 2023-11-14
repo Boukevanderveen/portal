@@ -19,27 +19,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($registrations as $registration)
-                        <tr class="bg-white border-b ">
-                            <td class="px-6 py-4">
-                                {{$registration->user->name}}
-                                <form method="post" action="{{ route('admin.projectweeks.registrations.destroy', [$projectweek, $registration]) }}"> @csrf
-                                    @method('delete')
-                                <button type="submit"
-                                onclick="return confirm('Weet je zeker dat je {{ $registration->user->name }} wilt uitschrijven?')" role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
-                                   
-                                </button>
-                                    </a>
-                            </form>
-                            </td>
-                        </td>
-                            </td>
-                        </tr>
+                        @foreach ($registrations as $registration)
+                            <tr class="bg-white border-b ">
+                                <td class="px-6 py-4">
+                                    {{ $registration->user->name }}
+                                </td>
+                                <td>
+                                        <form method="post" action="{{ route('admin.projectweeks.registrations.destroy', [$projectweek, $registration]) }}"> @csrf
+                                            @method('delete')
+                                            <button type="submit"
+                                                onclick="return confirm('Weet je zeker dat je {{ $registration->user->name }} wilt verwijderen? Hiermee worden alle bestanden en de gebruiker zelf op Linux permanent verwijderd.')"
+                                                role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
+
+                                            </button>
+
+                                         
+                                        </form>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
         </div>
-    </div>
 
         <!-- Main modal -->
         <div id="manage-modal" tabindex="-1" aria-hidden="true"

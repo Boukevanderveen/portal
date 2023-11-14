@@ -26,8 +26,7 @@ class StoreBookRequest extends FormRequest
             'name' => 'required|max:55',
             'ISBN' => 'required|max:13',
             'price' => 'required|regex:/^[0-9]{1,9}([,.][0-9]{1,9})?$/',
-            'period' => 'required|max:55',
-            'school_year' => 'required|numeric|max:4|min:1',
+            'school_year' => 'required|numeric|max:10|min:1',
         ];
     }
 
@@ -40,8 +39,6 @@ class StoreBookRequest extends FormRequest
             'ISBN.max' => 'De ISBN mag niet meer dan :max karakters bevatten',
             'price.required' => 'De prijs is verplicht',
             'price.regex' => 'De prijs moet van juist formaat zijn. Voorbeeld: (1,95 of 1.95)',            
-            'period.required' => 'De periode is verplicht',
-            'period.max' => 'De periode mag niet meer hoger dan :max zijn',
             'school_year.required' => 'Het schooljaar is verplicht',
             'school_year.numeric' => 'Het schooljaar mag alleen cijfers bevatten',
             'school_year.max' => 'Het schooljaar mag niet hoger zijn dan :max',

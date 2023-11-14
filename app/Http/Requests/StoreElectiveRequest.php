@@ -29,7 +29,7 @@ class StoreElectiveRequest extends FormRequest
             'hours' => 'required|numeric|max:2000',
             'teacher' => 'required:max:55',
             'period' => 'required|max:55',
-            'code' => 'nullable|numeric',
+            'code' => 'nullable',
         ];
     }
 
@@ -47,7 +47,6 @@ class StoreElectiveRequest extends FormRequest
             'teacher.max' => 'De docent mag niet meer dan :max karakter zijn',    
             'period.required' => 'De periode is verplicht',
             'period.max' => 'De periode mag niet meer hoger dan :max zijn',
-            'code.numeric' => 'De code mag alleen cijfers bevatten',    
         ];
     }
 }
