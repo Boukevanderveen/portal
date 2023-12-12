@@ -1,4 +1,6 @@
 <x-guest-layout>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script> 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
