@@ -17,8 +17,8 @@
         referrerpolicy="no-referrer" />
 
     <!-- Scripts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script> 
+    <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->    
+
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 </head>

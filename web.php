@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
 	return view("index");
     })->name('index');
@@ -124,6 +123,8 @@ use Illuminate\Support\Facades\Route;
 
         Route::get('search', [BookController::class, 'searchIndex'])->name('search');
     });
+
+Route::middleware(['auth'])->group(function () {
 
 Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],function ()
 {
@@ -273,7 +274,7 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
         Route::get('search', [BookController::class, 'searchIndex'])->name('search');
     });
 });
-//});
+});
 
 
 require __DIR__.'/auth.php';

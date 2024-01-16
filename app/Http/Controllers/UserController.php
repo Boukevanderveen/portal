@@ -21,7 +21,7 @@ class UserController extends Controller
 
     function edit(User $user){
         $this->authorize('create', $user);
-        return view('admin.edit.edit', compact(['user']));
+        return view('admin.users.edit', compact(['user']));
     }
 
     function store(StoreUserRequest $request)

@@ -47,6 +47,7 @@ class ProjectController extends Controller
         if(isset($file)){
             $file->move(public_path('/images/projects/' . $project->id), $fileName);
         }
+        
         return redirect('/admin/projects')->with('succes', 'Project succesvol aangemaakt.');
     }
 

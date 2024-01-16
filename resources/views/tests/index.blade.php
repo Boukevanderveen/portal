@@ -5,11 +5,11 @@
             Toetsen
             @if ($currentyear)
                 <button onclick="window.location='{{ route('tests.lastyear') }}'"
-                    class="float-right text-sm bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                    class="float-right focus:outline-none font-bold text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 rounded-sm text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
                     < Vorig jaar </button>
                     @else
                         <button onclick="window.location='{{ route('tests.index') }}'"
-                            class="float-right text-sm bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                            class="float-right focus:outline-none font-bold text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 rounded-sm text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
                             > Huidig jaar
                         </button>
             @endif
@@ -21,7 +21,7 @@
         <div class="grid grid-cols-1 gap-4 mt-3">
             <div class="max-w-full  overflow-hidden shadow-lg">
                 <div class="relative  row-start-2 row-span-1 border">
-                    <table class="w-full text-sm text-left ">
+                    <table class="w-full text-sm text-left bg-[#3a5757]">
 
                         <tbody>
                             @foreach ($tests as $test)
@@ -87,7 +87,7 @@
         <div class="grid grid-cols-1 gap-4 mt-3">
             <div class="max-w-full  overflow-hidden shadow-lg">
                 <div class="relative  row-start-2 row-span-1 border">
-                    <table class="w-full text-sm text-left ">
+                    <table class="w-full text-sm text-left bg-[#3a5757]">
 
                         <tbody>
                             @foreach ($projectweeks as $projectweek)

@@ -21,7 +21,6 @@
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $trip->name }}</h6>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->date }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->time }}</p>
-                        <p class="mb-1 text-gray-500 dark:text-gray-400">Leerjaar {{ $trip->school_year }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">Locatie: {{ $trip->location }}</p>
                 </div>
             </div>            
@@ -44,7 +43,6 @@
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $trip->name }}</h6>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->date }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->time }}</p>
-                        <p class="mb-1 text-gray-500 dark:text-gray-400">Leerjaar {{ $trip->school_year }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">Locatie: {{ $trip->location }}</p>
                 </div>
             </div>            
@@ -67,7 +65,6 @@
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $trip->name }}</h6>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->date }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->time }}</p>
-                        <p class="mb-1 text-gray-500 dark:text-gray-400">Leerjaar {{ $trip->school_year }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">Locatie: {{ $trip->location }}</p>
                 </div>
             </div>            
@@ -90,7 +87,6 @@
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $trip->name }}</h6>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->date }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->time }}</p>
-                        <p class="mb-1 text-gray-500 dark:text-gray-400">Leerjaar {{ $trip->school_year }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">Locatie: {{ $trip->location }}</p>
                 </div>
             </div>            
