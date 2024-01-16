@@ -4,15 +4,14 @@
         <div class="text-3xl col-start-1 col-span-1">
             {{ $projectweek->name }}
             <button data-modal-target="manage-modal" data-modal-toggle="manage-modal" type="button"
-                class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Beheer inschrijvingen
+                class="float-right focus:outline-none font-bold text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 rounded-sm text-sm px-5 py-2.5 me-2 mb-2">Beheer inschrijvingen
             </button>
         </div>
 
         <div class="max-w-full  overflow-hidden shadow-lg">
             <div class="relative  row-start-2 row-span-1 border">
-                <table class="w-full text-sm text-left ">
-                    <thead class="text-xs  uppercase ">
-                        <tr>
+                <table class="w-full text-sm text-left bg-[#3a5757]">
+                    <thead class="text-xs  uppercase text-white ">                        <tr>
                             <th scope="col" class="px-6 py-3">
                                 Naam
                             </th>
@@ -48,9 +47,9 @@
             class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-md max-h-full">
                 <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="relative bg-white rounded-lg shadow ">
                     <button type="button"
-                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
                         data-modal-hide="manage-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
@@ -60,13 +59,13 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Beheer inschrijvingen</h3>
+                        <h3 class="mb-4 text-xl font-medium text-gray-900 ">Beheer inschrijvingen</h3>
                         <form class="space-y-6" method="POST" action="{{ route('admin.projectweeks.registrations.store', $projectweek) }}">
                         @csrf
 
                             <div>
                                 <label for="user_ids"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingeschrevenen</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 ">Ingeschrevenen</label>
                                     <select name="user_ids[]" class="js-example-basic-multiple" style="width: 100%"  multiple="multiple">
                                         @foreach($registrations as $registration)
                                         <option selected value="{{$registration->user_id}}">{{$registration->user->name}}</option>
@@ -79,7 +78,7 @@
                                     </select>
                             </div>
                             <button type="submit"
-                                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            class="w-full font-bold text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 Bevestig</button>
                         </form>
                     </div>

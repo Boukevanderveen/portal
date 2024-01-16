@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-[#2f4443] border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -6,68 +6,68 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a class="w-20" href="{{ route('index') }}">
-                        <img src="{{ asset('/logo/Firda_Logo_Groen_CMYK.png') }}"> 
+                        <img src="{{ asset('/logo/firda_logo_wit.png') }}"> 
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                        Home
+                        <span class="text-white">Home</span>
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('websites.index')" :active="request()->routeIs('websites.index')">
-                        Websites
+                        <span class="text-white">Websites</span>
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('tests.index')" :active="request()->routeIs('tests.*')">
-                        Toetsen
+                        <span class="text-white">Toetsen</span>
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('trips.index')" :active="request()->routeIs('trips.index')">
-                        Uitjes
+                        <span class="text-white">Uitjes</span>
                     </x-nav-link>
                 </div>
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('electives.index')" :active="request()->routeIs('electives.index')">
-                        Keuzedelen
+                        <span class="text-white">Keuzedelen</span>
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
-                        Boeken
+                        <span class="text-white">Boeken</span>
                     </x-nav-link>
                 </div>
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
-                        Projecten
+                        <span class="text-white">Projecten</span>
                     </x-nav-link>
                 </div>
             </div>
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(Auth::User()->isAdmin)
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin')">
-                        Admin
+                        <span class="text-white">Admin</span>
                     </x-nav-link>
                     @endif
                 </div>
                 @auth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <div class="text-white">{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -96,7 +96,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Uitloggen') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>

@@ -4,14 +4,13 @@
 
         <div class="text-3xl col-start-1 col-span-1">
             Project weken
-            <button onclick="window.location='{{ route('admin.projectweeks.create') }}'" type="button"  class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nieuwe projectweek</button>
+            <button onclick="window.location='{{ route('admin.projectweeks.create') }}'" type="button"  class="float-right focus:outline-none font-bold text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 rounded-sm text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Nieuwe projectweek</button>
         </div>
 
         <div class="max-w-full  overflow-hidden shadow-lg">
         <div class="relative  row-start-2 row-span-1 border">
-            <table class="w-full text-sm text-left ">
-                <thead class="text-xs  uppercase ">
-                    <tr>
+            <table class="w-full text-sm text-left bg-[#3a5757]">
+                <thead class="text-xs  uppercase text-white ">                    <tr>
                         <th scope="col" class="px-6 py-3">
                             Naam
                         </th>

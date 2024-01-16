@@ -66,7 +66,7 @@ class WebsiteController extends Controller
         return redirect('/websites/personal')->with('succes', 'Website succesvol bewerkt.');
     }
 
-    function store(StoreWebsiteRequest $request)
+    function store(StoreWebsiteRequest $request, Website $website)
     {
         $this->authorize('create', $website);
         /*
