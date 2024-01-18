@@ -28,7 +28,7 @@
                                 Beschrijving *
                             </label>
                             <textarea rows="4"
-                            class="shadow appearance-none border @error('description') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            class="shadow appearance-none border @error('description') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 text-base mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 name="description" id="description" >{{old('description', $elective->description)}}</textarea>
                             @if ($errors->has('description'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('description') }}</p>
@@ -40,7 +40,7 @@
                                 Uren *
                             </label>
                             <input
-                            value="{{old('hours', $elective->hours)}}" class="shadow appearance-none border @error('hours') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            value="{{old('hours',round($elective->hours, 0))}}" class="shadow appearance-none border @error('hours') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 name="hours" id="hours" type="number">
                             @if ($errors->has('hours'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('hours') }}</p>

@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->group(function () {
 
     Route::get('/', function () {
         return view('index');
@@ -268,7 +267,6 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
 
         Route::get('search', [BookController::class, 'searchIndex'])->name('search');
     });
-});
 });
 
 

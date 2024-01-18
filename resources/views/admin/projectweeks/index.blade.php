@@ -49,10 +49,10 @@
                             {{$projectweek->week}}
                         </td>
                         <td class="px-6 py-4">
-                            {{$projectweek->start_date}}
+                        {{ date('d-m-Y', strtotime($projectweek->start_date)); }}
                         </td>
                         <td class="px-6 py-4">
-                            {{$projectweek->end_date}}
+                        {{ date('d-m-Y', strtotime($projectweek->end_date)); }}
                         </td>
                         <td class="px-6 py-4">
                             {{$projectweek->target_class}}

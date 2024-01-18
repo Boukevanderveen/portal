@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-[#2f4443] border-b border-gray-100">
+<nav x-data="{ open: false }" class="fixed w-full bg-[#2f4443] border-b border-gray-100 ">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -9,6 +9,7 @@
                         <img src="{{ asset('/logo/firda_logo_wit.png') }}"> 
                     </a>
                 </div>
+                @if(!Route::is('login') )
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
@@ -17,7 +18,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('websites.index')" :active="request()->routeIs('websites.index')">
+                    <x-nav-link :href="route('websites.index')" :active="request()->routeIs('websites.*')">
                         <span class="text-white">Websites</span>
                     </x-nav-link>
                 </div>
@@ -51,18 +52,28 @@
                         <span class="text-white">Projecten</span>
                     </x-nav-link>
                 </div>
+            @endif
             </div>
 
-
+            @if(!Route::is('login') )
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @auth
                     @if(Auth::User()->isAdmin)
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin')">
                         <span class="text-white">Admin</span>
                     </x-nav-link>
                     @endif
+                    @endauth
                 </div>
+
+                @guest
+                <x-nav-link :href="route('login')">
+                        <span class="text-white">Inloggen</span>
+                </x-nav-link>
+                @endguest
+
                 @auth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -103,7 +114,9 @@
                 </x-dropdown>
                 @endauth
             </div>
+            @endif
 
+            @if(!Route::is('login') )
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -113,9 +126,11 @@
                     </svg>
                 </button>
             </div>
+            @endif
         </div>
     </div>
 
+    @if(!Route::is('login') )
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
@@ -131,6 +146,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
+        @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
@@ -155,5 +171,7 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
+    @endif
 </nav>

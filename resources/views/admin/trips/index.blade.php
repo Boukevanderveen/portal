@@ -43,7 +43,7 @@
                                     {{ $trip->time }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $trip->date }}
+                                    {{ date('d-m-Y', strtotime($trip->date)); }}                                    
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $trip->school_year }}

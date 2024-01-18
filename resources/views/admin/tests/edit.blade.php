@@ -100,7 +100,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="registerable">
                                 Inschrijfbaar *
                             </label>
-                            <select class="appearance-none rounded w-full" id="registerable" name="registerable">
+                            <select class="text-sm w-full p-2.5 rounded" id="registerable" name="registerable">
                                 <option value="0" @if(old('registerable') !== null && old('registerable') == 0) selected @else @if(!$test->registerable) selected @endif @endif>Niet inschrijfbaar</option>
                                 <option value="1" @if(old('registerable') !== null && old('registerable') == 1) selected @else @if(null == old('registerable') && $test->registerable) selected @endif @endif >Inschrijfbaar</option>
                             </select>

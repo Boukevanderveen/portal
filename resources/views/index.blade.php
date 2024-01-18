@@ -6,7 +6,7 @@
             Welkom, {{Auth::User()->name;}}
             @endauth
             @guest
-            Je bent niet ingelogd
+            Welkom op Mbo Portal
             @endguest
         </div>
     </div>

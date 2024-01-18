@@ -10,7 +10,7 @@ use App\Http\Requests\StoreProjectweekRequest;
 use App\Http\Requests\UpdateProjectweekRequest;
 use Auth;
 
-class ProjectweekController extends Controller
+class ProjectWeekController extends Controller
 {
 
     function registrationsStore(Request $request, Projectweek $projectweek)

@@ -43,7 +43,7 @@
                                     {{ $test->time }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $test->date }}
+                                    {{ date('d-m-Y', strtotime($test->date)); }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $test->period }}

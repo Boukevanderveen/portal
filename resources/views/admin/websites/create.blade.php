@@ -39,7 +39,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="isPublic">
                                 Weergave op MBO Portal *
                             </label>
-                            <select class="appearance-none rounded w-full" id="isPublic" name="isPublic">
+                            <select class="text-sm w-full p-2.5 rounded" id="isPublic" name="isPublic">
                                 <option value="0" @if(old('isPublic') !== null && old('isPublic') == 0) selected @endif>Privé</option>
                                 <option value="1" @if(old('isPublic') !== null && old('isPublic') == 1) selected @endif >Publiek</option>
                             </select>
