@@ -99,11 +99,10 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="registerable">
                                 Inschrijfbaar *
                             </label>
-                            <select class="appearance-none rounded w-full" id="registerable" name="registerable">
+                            <select class="text-sm w-full p-2.5 rounded" id="registerable" name="registerable">
                                 <option selected value="0" @if(old('registerable') !== null && old('registerable') == 0) selected @endif>Niet inschrijfbaar</option>
                                 <option value="1" @if(old('registerable') !== null && old('registerable') == 1) selected @endif >Inschrijfbaar</option>
                             </select>
-
                         </div>
        
                         <button type="submit"

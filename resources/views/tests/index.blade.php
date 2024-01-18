@@ -30,20 +30,21 @@
                                         {{ $test->name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Start: {{ $test->date }} {{ date('H:i', strtotime($test->time)) }}
+                                        Start: {{ date('d-m-Y', strtotime($test->date)); }} {{ date('H:i', strtotime($test->time)) }}
                                     </td>
                                     <td class="px-6 py-4">
                                         Periode {{ $test->period }}
                                     </td>
                                     <td class="px-6 py-4">
                                         Herkansing: @if (isset($test->resit_date))
-                                            {{ $test->resit_date }} {{ date('H:i', strtotime($test->resit_time)) }}
+                                        {{ date('d-m-Y', strtotime($test->resit_date)); }} {{ date('H:i', strtotime($test->resit_time)) }}
                                         @else
                                             Nog geen
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">
                                         @if ($test->registerable)
+                                        @auth
                                             @if (\App\Models\Test_User::where(['user_id' => auth()->user()->id, 'test_id' => $test->id])->exists())
                                                 <form method="post"
                                                     action="{{ route('tests.registrations.destroy', $test) }}"> @csrf
@@ -62,6 +63,10 @@
                                                     </button>
                                                 </form>
                                             @endif
+                                        @endauth
+                                        @guest
+                                        Log in om in te schrijven
+                                        @endguest
                                         @endif
                                     </td>
 
@@ -102,13 +107,14 @@
                                         Week {{ $projectweek->week }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $projectweek->start_date }} - {{ $projectweek->end_date }} 
+                                    {{ date('d-m-Y', strtotime($projectweek->start_date)); }} - {{ date('d-m-Y', strtotime($projectweek->end_date)); }}
                                     </td>
                                     <td class="px-6 py-4">
                                         Doelgroep: {{ $projectweek->target_class }}
                                     </td>
                                     <td class="px-6 py-4">
                                         @if ($projectweek->registerable)
+                                        @auth
                                             @if (\App\Models\Projectweek_User::where(['user_id' => auth()->user()->id, 'projectweek_id' => $projectweek->id])->exists())
                                                 <form method="post"
                                                     action="{{ route('projectweeks.registrations.destroy', $projectweek) }}"> @csrf
@@ -127,6 +133,10 @@
                                                     </button>
                                                 </form>
                                             @endif
+                                        @endauth
+                                        @guest
+                                        Log in om in te schrijven
+                                        @endguest
                                         @endif
                                     </td>
 

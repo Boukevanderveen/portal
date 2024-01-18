@@ -19,6 +19,8 @@
 
 
     <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
@@ -34,7 +36,8 @@
                 @include('includes.message')
                 <div class="grid  gap-4">
                     <div>
-                        <div>
+                        <!-- voorkomt dat er teveel ruimte tussen de flashmessage en de content komt -->
+                        <div class="<?php if(!Session::has('succes') && !Session::has('error')) { echo 'mt-16'; } ?>">
                         @include('layouts.sidebar')
                         </div>
                         @yield('content')

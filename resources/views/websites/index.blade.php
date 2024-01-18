@@ -3,9 +3,11 @@
     <div class="grid grid-cols-1 gap-4">
         <div class="text-3xl col-start-1 col-span-1">
             Websites
+            @auth
             <button onclick="window.location='{{ route('websites.create') }}'" type="button"
             class="float-right focus:outline-none font-bold text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 rounded-sm text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Nieuwe
                 website</button>
+            @endauth
         </div>
 
         <div class="grid grid-cols-3 gap-4">

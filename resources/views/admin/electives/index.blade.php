@@ -44,7 +44,7 @@
                                     {{ $elective->code }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $elective->hours }}
+                                    {{round($elective->hours, 0)}}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $elective->teacher }}

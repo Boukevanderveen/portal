@@ -10,7 +10,6 @@ class BookController extends Controller
 {
 
     function index(Book $book){
-        $this->authorize('view', $book);
         return view('books.index', ['books' => Book::All()]);
     }
 

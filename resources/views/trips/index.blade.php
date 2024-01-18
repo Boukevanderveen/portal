@@ -19,7 +19,7 @@
                 </a>
                 <div class="p-5">
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $trip->name }}</h6>
-                        <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->date }}</p>
+                        <p class="mb-1 text-gray-500 dark:text-gray-400">{{ date('d-m-Y', strtotime($trip->date))}}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->time }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">Locatie: {{ $trip->location }}</p>
                 </div>
@@ -41,7 +41,7 @@
                 </a>
                 <div class="p-5">
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $trip->name }}</h6>
-                        <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->date }}</p>
+                        <p class="mb-1 text-gray-500 dark:text-gray-400">{{ date('d-m-Y', strtotime($trip->date))}}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->time }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">Locatie: {{ $trip->location }}</p>
                 </div>
@@ -63,7 +63,7 @@
                 </a>
                 <div class="p-5">
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $trip->name }}</h6>
-                        <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->date }}</p>
+                        <p class="mb-1 text-gray-500 dark:text-gray-400">{{ date('d-m-Y', strtotime($trip->date))}}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->time }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">Locatie: {{ $trip->location }}</p>
                 </div>
@@ -85,7 +85,7 @@
                 </a>
                 <div class="p-5">
                         <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $trip->name }}</h6>
-                        <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->date }}</p>
+                        <p class="mb-1 text-gray-500 dark:text-gray-400">{{ date('d-m-Y', strtotime($trip->date))}}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">{{ $trip->time }}</p>
                         <p class="mb-1 text-gray-500 dark:text-gray-400">Locatie: {{ $trip->location }}</p>
                 </div>

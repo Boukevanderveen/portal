@@ -45,16 +45,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="isPublic">
-                                Weergave op MBO Portal *
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="privileges">
+                                Privileges
                             </label>
-                            <select class="appearance-none rounded w-full" id="isPublic" name="isPublic">
-                                <option value="0" @if(old('isPublic') !== null && old('isPublic') == 0) selected @else @if(!$website->isPublic && !$website->isPublic) selected @endif @endif>Privé</option>
-                                <option value="1" @if(old('isPublic') !== null && old('isPublic') == 1) selected @else @if(null == old('isPublic') && $website->isPublic) selected @endif @endif >Publiek</option>
+                            <select class="text-sm w-full p-2.5 rounded" id="privileges" name="privileges">
+                                <option value="1" @if(old('privileges') !== null && old('privileges') == 1) selected @else @if(null == old('privileges') && $user->isStudent) selected @endif @endif >Student</option>
+                                <option value="2" @if(old('privileges') !== null && old('privileges') == 2) selected @else @if(null == old('privileges') && $user->isAdmin) selected @endif @endif >Admin</option>
                             </select>
-                            @if ($errors->has('isPublic'))
-                                <p class="text-red-500 text-xs italic">{{ $errors->first('isPublic') }}</p>
-                            @endif
                         </div>
                         <button type="submit"
                             class="focus:outline-none font-bold text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 rounded-sm text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">

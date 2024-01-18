@@ -38,7 +38,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="privileges">
                                 Privileges
                             </label>
-                            <select class="appearance-none rounded w-full" id="privileges" name="privileges">
+                            <select class="text-sm w-full p-2.5 rounded" id="privileges" name="privileges">
                                 <option value="1" @if(old('privileges') !== null && old('privileges') == 1) selected @else @if(null == old('privileges') && $user->isStudent) selected @endif @endif >Student</option>
                                 <option value="2" @if(old('privileges') !== null && old('privileges') == 2) selected @else @if(null == old('privileges') && $user->isAdmin) selected @endif @endif >Admin</option>
                             </select>

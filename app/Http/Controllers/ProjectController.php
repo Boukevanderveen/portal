@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\File;
 class ProjectController extends Controller
 {
     function index(Project $project){
-        $this->authorize('view', $project);
         return view('projects.index', ['projects' => Project::All()]);
     }
 
@@ -45,7 +44,7 @@ class ProjectController extends Controller
         }
         $project->save();
         if(isset($file)){
-            $file->move(public_path('/images/projects/' . $project->id), $fileName);
+            $file->move(('/home/lara/public_html/images/projects/' . $project->id), $fileName);
         }
         
         return redirect('/admin/projects')->with('succes', 'Project succesvol aangemaakt.');
@@ -62,11 +61,15 @@ class ProjectController extends Controller
             $file = $request->file('picture');
             $path = public_path() . '/images/projects/' . $project->id . '/'. $project->picture .' ';
             //dd(File::delete(public_path('/images/projects/' . $project->id), $fileName));
-            $project->picture = $fileName;
         }
         if(isset($file)){
-            $file->move(public_path('/images/projects/' . $project->id), $fileName);
+            //dd('/home/lara/public_html/images/projects/' . $project->id . '/'. $project->picture .'', $project);
+            unlink('/home/lara/public_html/images/projects/' . $project->id . '/'. $project->picture .'');
+
+            $file->move(('/home/lara/public_html/images/projects/' . $project->id), $fileName);
         }
+        $project->picture = $fileName;
+
         $project->update();
         return redirect('/admin/projects')->with('succes', 'Project succesvol bewerkt.');
     }
@@ -74,6 +77,7 @@ class ProjectController extends Controller
     function destroy(Request $request, Project $project)
     {
         $this->authorize('delete', $project);
+        unlink('/home/lara/public_html/images/projects/' . $project->id . '/'. $project->picture .'');
         $project->delete();
         return back()->with('succes', 'Project succesvol verwijderd.');
     }

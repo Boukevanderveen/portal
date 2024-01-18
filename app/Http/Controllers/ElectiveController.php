@@ -10,7 +10,6 @@ class ElectiveController extends Controller
 {
 
     function index(Elective $elective){
-        $this->authorize('view', $elective);
         return view('electives.index', ['electives' => Elective::All()]);
     }
 

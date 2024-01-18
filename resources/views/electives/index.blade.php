@@ -9,7 +9,8 @@
             <div class="@if(!$firstLoop) mb-4 @endif  max-w bg-white border border-gray-200 rounded-lg shadow =">
                 <div class="p-5">
                         <b class=" text-2xl font-bold tracking-tight text-gray-900">{{ $elective->name }}</b>
-                        <h6><b >{{ $elective->hours }} uur</b><h6>
+                        <h6><b > {{round($elective->hours, 0)}} uur</b><h6>
+
                         <h6><b >{{ $elective->teacher }}</b><h6>
                         <h6><b >Periode {{ $elective->period }}</p><h6>
                         <h6><b >Code: @if($elective->code == NULL) Geen @endif {{ $elective->code }}</b><h6>
