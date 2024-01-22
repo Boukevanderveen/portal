@@ -10,9 +10,9 @@
             @endauth
         </div>
 
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm: alg-cols-1">
             @foreach ($websites as $website)
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg">
                     <a href="#">
                         <img class="rounded-t-lg"
                             src="http://uplod.wikimedia.org/wikipedia/en/thumb/c/cb/SC_Cambuur_logo.svg/800px-SC_Cambuur_logo.svg.png"

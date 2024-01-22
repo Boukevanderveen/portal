@@ -9,7 +9,7 @@
         @if($trips1->isEmpty())
         <h1 class="text-1xl"> Nog niets op het programma </h1>
         @endif
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm: alg-cols-1">
             @foreach($trips1 as $trip)
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
                 <a href="#">
@@ -31,7 +31,7 @@
         @if($trips2->isEmpty())
         <h1 class="text-1xl"> Nog niets op het programma </h1>
         @endif
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm: alg-cols-1">
             @foreach($trips2 as $trip)
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
                 <a href="#">
@@ -53,7 +53,7 @@
         @if($trips3->isEmpty())
         <h1 class="text-1xl"> Nog niets op het programma </h1>
         @endif
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm: alg-cols-1">
             @foreach($trips3 as $trip)
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
                 <a href="#">
@@ -75,7 +75,7 @@
         @if($trips4->isEmpty())
         <h1 class="text-1xl"> Nog niets op het programma </h1>
         @endif
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm: alg-cols-1">
             @foreach($trips4 as $trip)
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
                 <a href="#">

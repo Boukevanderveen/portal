@@ -8,7 +8,7 @@
         @if($projects->isEmpty())
         <h1 class="text-1xl"> Nog niets op het programma </h1>
         @endif
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm: alg-cols-1">
             @foreach ($projects as $project)
                 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
                     <img style="width: 400px; height: 300px" src="{{ asset('/images/projects/'. $project->id .'/'. $project->picture.'') }}">

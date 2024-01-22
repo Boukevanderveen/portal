@@ -8,7 +8,10 @@
                     <a class="w-20" href="{{ route('index') }}">
                         <img src="{{ asset('/logo/firda_logo_wit.png') }}"> 
                     </a>
+                
                 </div>
+
+              
                 @if(!Route::is('login') )
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
@@ -118,6 +121,7 @@
 
             @if(!Route::is('login') )
             <!-- Hamburger -->
+            
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -132,41 +136,82 @@
 
     @if(!Route::is('login') )
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open} " class="position-absolute z-1 hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link class="text-white" :href="route('index')" :active="request()->routeIs('index')">
+                Home
             </x-responsive-nav-link>
         </div>
-
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link class="text-white" :href="route('websites.index')" :active="request()->routeIs('websites.index')">
+                Websites
             </x-responsive-nav-link>
         </div>
-
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="text-white" :href="route('tests.index')" :active="request()->routeIs('tests.index')">
+                Toetsen
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="text-white" :href="route('electives.index')" :active="request()->routeIs('electives.index')">
+                Keuzedelen
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="text-white" :href="route('books.index')" :active="request()->routeIs('books.index')">
+                Boeken
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="text-white" :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                Projecten
+            </x-responsive-nav-link>
+        </div>
+        @auth
+        @if(Auth::User()->isAdmin)
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="text-white" :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                Admin
+            </x-responsive-nav-link>
+        </div>
+        @endif
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <x-responsive-nav-link class="text-white"
+                    onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                Uitloggen
+            </x-responsive-nav-link>
+        </form>
+        @endauth
+        @guest
+            <x-responsive-nav-link :href="route('login')" class="text-white mb-2">
+                Inloggen
+            </x-responsive-nav-link>
+        @endguest
         <!-- Responsive Settings Options -->
         @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="font-medium text-base text-white">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-sm text-white">{{ Auth::user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
 
-                <x-responsive-nav-link :href="route('admin.index')">
-                    {{ __('Profile') }}
+                <x-responsive-nav-link :href="route('websites.personal')" class="text-white"
+                >
+                    Mijn websites
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <x-responsive-nav-link :href="route('logout')" class="text-white"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        Uitloggen
                     </x-responsive-nav-link>
                 </form>
             </div>

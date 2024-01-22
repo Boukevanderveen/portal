@@ -10,7 +10,7 @@
         </div>
 
         <div class="max-w-full  overflow-hidden shadow-lg">
-            <div class="relative  row-start-2 row-span-1 border">
+            <div class=" row-start-2 row-span-1 border overflow-x-auto">
                 <table class="w-full text-sm text-left bg-[#3a5757]">
                     <thead class="text-xs  uppercase text-white ">
                         <tr>
@@ -52,7 +52,7 @@
                                 <td class="px-6 py-4">
                                     {{ $user->created_at->format('d-m-Y') }}
                                 </td>
-                                <td>
+                                <td class="min-w-24">
                                     @if (Auth::User()->id !== $user->id)
                                         <form method="post" action="{{ route('admin.users.destroy', $user) }}"> @csrf
                                             @method('delete')
@@ -62,11 +62,15 @@
 
                                             </button>
 
-                                            <a href="{{ route('admin.users.edit', $user) }}">
+                                     
+                                        </form>
+                                        
+
+                                    @endif
+                                    <a class="mt-5" href="{{ route('admin.users.edit', $user) }}">
                                                 <i class="fa fa-pencil float-right mr-5" aria-hidden="true"></i>
                                             </a>
-                                        </form>
-                                    @endif
+
 
                                 </td>
                             </tr>

@@ -37,7 +37,7 @@
 
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="picture">
-                                Afbeelding
+                                Afbeelding (max 1mb)
                             </label>
                             <input
                             value="{{old('picture')}}" class="shadow appearance-none border @error('picture') border-red-500 @enderror  mb-3 rounded w-full  text-sm leading-tight focus:outline-none focus:shadow-outline"

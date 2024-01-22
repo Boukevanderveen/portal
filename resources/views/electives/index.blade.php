@@ -3,22 +3,22 @@
         <div class="text-3xl col-start-1 col-span-1">
             Keuzedelen
         </div>
-            @php $firstLoop = true @endphp
+        <div class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm: alg-cols-1">
             @foreach($electives as $elective)
-            
-            <div class="@if(!$firstLoop) mb-4 @endif  max-w bg-white border border-gray-200 rounded-lg shadow =">
-                <div class="p-5">
-                        <b class=" text-2xl font-bold tracking-tight text-gray-900">{{ $elective->name }}</b>
-                        <h6><b > {{round($elective->hours, 0)}} uur</b><h6>
-
-                        <h6><b >{{ $elective->teacher }}</b><h6>
-                        <h6><b >Periode {{ $elective->period }}</p><h6>
-                        <h6><b >Code: @if($elective->code == NULL) Geen @endif {{ $elective->code }}</b><h6>
-                        <h6 class="text-gray-500 dark:text-gray-400"> {{ $elective->description }}<h6>
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
+                <a href="#">
+                    <img class="rounded-t-lg"
+                        src="http://uplod.wikimedia.org/wikipedia/en/thumb/c/cb/SC_Cambuur_logo.svg/800px-SC_Cambuur_logo.svg.png"
+                        alt="" />
+                </a>
+                <div role="button" class="p-5" onclick="location.href='{{ URL::route('electives.show', $elective); }}';" >
+                        <h6 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $elective->name }}</h6>
+                        <p class="mb-1 text-gray-500 dark:text-gray-400">Docent: {{ $elective->teacher }}</p>
+                        <p class="mb-1 text-gray-500 dark:text-gray-400">Periode: {{$elective->period}}</p>
+                        <p class="mb-1 text-gray-500 dark:text-gray-400">Code: {{$elective->code}}</p>
                 </div>
-            </div>    
-            @php $firstLoop = false @endphp
-            @endforeach
+            </div>            @endforeach
+        </div>
 
        
 @endsection

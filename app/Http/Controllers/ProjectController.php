@@ -64,7 +64,9 @@ class ProjectController extends Controller
         }
         if(isset($file)){
             //dd('/home/lara/public_html/images/projects/' . $project->id . '/'. $project->picture .'', $project);
-            unlink('/home/lara/public_html/images/projects/' . $project->id . '/'. $project->picture .'');
+            if(NULL !== $project->picture){
+                unlink('/home/lara/public_html/images/projects/' . $project->id . '/'. $project->picture .'');
+            }
 
             $file->move(('/home/lara/public_html/images/projects/' . $project->id), $fileName);
         }
@@ -77,7 +79,9 @@ class ProjectController extends Controller
     function destroy(Request $request, Project $project)
     {
         $this->authorize('delete', $project);
+        if(NULL !== $project->picture){
         unlink('/home/lara/public_html/images/projects/' . $project->id . '/'. $project->picture .'');
+        }
         $project->delete();
         return back()->with('succes', 'Project succesvol verwijderd.');
     }

@@ -7,6 +7,10 @@ use Auth;
 
 class HomeController extends Controller
 {
+    function index(){
+        return view('index');
+    }
+
     function adminIndex(){
         if(Auth::User()->isAdmin)
         {

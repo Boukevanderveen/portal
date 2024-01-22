@@ -27,8 +27,7 @@ class WebsiteController extends Controller
 
     function edit(Website $website){
         $this->authorize('update', $website);
-        $students = User::where('isStudent', 1)->get();
-        return view('websites.edit', compact(['website', 'students']));
+        return view('websites.edit', compact(['website']));
     }
 
     function create(Website $website){
