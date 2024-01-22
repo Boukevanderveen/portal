@@ -7,7 +7,7 @@ use App\Models\Projectweek;
 use App\Models\User;
 use App\Models\Projectweek_User;
 use App\Http\Requests\StoreProjectweekRequest;
-use App\Http\Requests\UpdateProjectweekRequest;
+use App\Http\Requests\UpdateProjectWeekRequest;
 use Auth;
 
 class ProjectWeekController extends Controller
@@ -43,7 +43,7 @@ class ProjectWeekController extends Controller
         return view('admin.projectweeks.edit', compact(['projectweek']));
     }
 
-    function store(StoreProjectweekRequest $request)
+    function store(UpdateProjectWeekRequest $request)
     {
         $projectweek = new Projectweek;
         $projectweek->name = $request->name;
@@ -57,7 +57,7 @@ class ProjectWeekController extends Controller
         return redirect('/admin/projectweeks')->with('succes', 'Project week succesvol aangemaakt.');
     }
 
-    function update(UpdateProjectweekRequest $request, Projectweek $projectweek)
+    function update(UpdateProjectWeekRequest $request, Projectweek $projectweek)
     {
         $projectweek->name = $request->name;
         $projectweek->period = $request->period;

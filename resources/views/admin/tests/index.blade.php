@@ -10,7 +10,7 @@
         </div>
 
         <div class="max-w-full  overflow-hidden shadow-lg">
-            <div class="relative  row-start-2 row-span-1 border">
+        <div class=" row-start-2 row-span-1 border overflow-x-auto">
                 <table class="w-full text-sm text-left bg-[#3a5757]">
                     <thead class="text-xs  uppercase text-white ">                        <tr>
                             <th scope="col" class="px-6 py-3">
@@ -58,27 +58,23 @@
                                         Niet toegestaan
                                     @endif
                                 </td>
-                                <td>
+                                <td class="min-w-28">
+                            <form method="post" action="{{ route('admin.tests.destroy', $test) }}"> @csrf
+                                @method('delete')
+                            <button type="submit"
+                            onclick="return confirm('Weet je zeker dat je {{ $test->name }} wilt verwijderen?')" role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
+                               
+                            </button>
 
-                                    <form method="post" action="{{ route('admin.tests.destroy', $test) }}"> @csrf
-                                        @method('delete')
-                                        <button type="submit"
-                                            onclick="return confirm('Weet je zeker dat je {{ $test->name }} wilt verwijderen?')"
-                                            role="button" class="fa fa-trash float-right mr-5" aria-hidden="true">
-
-                                        </button>
-
-                                        <a href="{{ route('admin.tests.edit', $test) }}">
-                                            <i class="fa fa-pencil float-right mr-5" aria-hidden="true"></i>
-                                        </a>
-                                        <a @if ($test->registerable) href="{{ route('admin.tests.registrations.index', $test) }}" @endif
-                                            class="fa-solid fa-user-group @if (!$test->registerable) text-slate-600 @endif">
-                                        </a>
-                                    </form>
+                            <a href="{{ route('admin.tests.edit', $test) }}">
+                                <i class="fa fa-pencil float-right mr-5" aria-hidden="true"></i>
+                            </a>
+                            <a @if($test->registerable) href="{{route('admin.tests.registrations.index', $test)}}" @endif class="fa-solid fa-user-group @if(!$test->registerable)text-slate-600 @endif">
+                            </a>
+                        </form>
 
 
-                                </td>
-                            </tr>
+                        </td>
                         @endforeach
                     </tbody>
                 </table>

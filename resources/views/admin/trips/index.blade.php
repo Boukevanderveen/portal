@@ -10,7 +10,7 @@
         </div>
 
         <div class="max-w-full  overflow-hidden shadow-lg">
-            <div class="relative  row-start-2 row-span-1 border">
+        <div class=" row-start-2 row-span-1 border overflow-x-auto">
                 <table class="w-full text-sm text-left bg-[#3a5757]">
                     <thead class="text-xs  uppercase text-white ">                        <tr>
                             <th scope="col" class="px-6 py-3">
@@ -54,7 +54,7 @@
                                 <td class="px-6 py-4">
                                     {{ $trip->created_at->format('d-m-Y') }}
                                 </td>
-                                <td>
+                                <td class="min-w-24">
                                     <form method="post" action="{{ route('admin.trips.destroy', $trip) }}"> @csrf
                                         @method('delete')
                                         <button type="submit"

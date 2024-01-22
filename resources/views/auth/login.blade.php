@@ -1,7 +1,7 @@
 @extends("layouts.app")
 @section("content")
 <div class="grid grid-cols-3 grid-rows-1 gap-0 mt-5">
-    <div class="col-start-2 max-w-sm bg-white border border-gray-200 rounded-lg m-3">
+    <div class="sm:col-start-1 col-span-3 max-w-sm bg-white border border-gray-200 rounded-lg m-3 lg:col-start-2 max-w-sm bg-white border border-gray-200 rounded-lg m-3">
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />

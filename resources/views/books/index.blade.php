@@ -5,7 +5,7 @@
             Boeken
         </div>
 
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm: alg-cols-1">
             @foreach($books as $book)
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
                 <a href="#">

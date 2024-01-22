@@ -1,7 +1,5 @@
-body {
-    color: lightblue;
-  }
+@import "tailwindcss/base";
 
-.class1{
-    color: green;
-}
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";

@@ -10,7 +10,7 @@
 
         <div class="grid grid-cols-3 gap-4">
             @foreach ($websites as $website)
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow =">
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow = col-span-3 lg:col-span-1">
                     <a href="#">
                         <img class="rounded-t-lg"
                             src="http://uplod.wikimedia.org/wikipedia/en/thumb/c/cb/SC_Cambuur_logo.svg/800px-SC_Cambuur_logo.svg.png"

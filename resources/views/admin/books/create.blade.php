@@ -10,7 +10,7 @@
             <form method="post" onsubmit="doSubmit()" action="{{ route('admin.books.store') }}">
                 @csrf
                 <div class="grid grid-cols-5 gap-4">
-                    <div class="text-3xl col-start-2 col-span-3">
+                <div class="text-3xl col-start-1 col-span-5 lg:col-start-2 lg:col-span-3">
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
                                 Naam *

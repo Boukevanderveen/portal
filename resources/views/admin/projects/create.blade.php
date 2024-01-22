@@ -10,7 +10,7 @@
             <form method="post" action="{{ route('admin.projects.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="grid grid-cols-5 gap-4">
-                    <div class="text-3xl col-start-2 col-span-3">
+                    <div class="text-3xl col-start-1 col-span-5 lg:col-start-2 lg:col-span-3">
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
                                 Naam *
@@ -37,7 +37,7 @@
 
                         <div class="mb-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="picture">
-                                Afbeelding
+                                Afbeelding (max 1mb)
                             </label>
                             <input
                             value="{{old('picture')}}" class="shadow appearance-none border @error('picture') border-red-500 @enderror  mb-3 rounded w-full  text-sm leading-tight focus:outline-none focus:shadow-outline"

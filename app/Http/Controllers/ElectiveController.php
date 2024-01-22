@@ -13,6 +13,10 @@ class ElectiveController extends Controller
         return view('electives.index', ['electives' => Elective::All()]);
     }
 
+    function show(Elective $elective){
+        return view('electives.show', compact(['elective']));
+    }
+
     function adminIndex(Elective $elective){
         $this->authorize('view', $elective);
         return view('admin.electives.index', ['electives' => Elective::Paginate(10)]);
