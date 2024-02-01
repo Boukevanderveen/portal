@@ -7,10 +7,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\ElectiveController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectWeekController;
+use App\Http\Controllers\SubProjectController;
+use App\Http\Controllers\ProjectPostController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -26,10 +29,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-    Route::get('', function () {
-        return view('index');
-    })->name('index');
+    Route::get('', [HomeController::class, 'index'])->name('index');
 
+
+    Route::group([ 'prefix' => 'users', 'as' => 'users.'], function ()
+    {
+        Route::group([ 'prefix' => '{user}'], function (){
+        Route::get('show', [UserController::class, 'show'])->name('show');
+        });
+    });
 
     Route::group([ 'prefix' => 'websites', 'as' => 'websites.'], function ()
     {
@@ -38,6 +46,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('', [WebsiteController::class, 'index'])->name('index');
         Route::get('create', [WebsiteController::class, 'create'])->name('create');
         Route::post('store', [WebsiteController::class, 'store'])->name('store');
+        Route::post('filter', [WebsiteController::class, 'indexFilter'])->name('filter');
 
         Route::group([ 'prefix' => '{website}'], function ()
         {
@@ -50,6 +59,22 @@ use Illuminate\Support\Facades\Route;
     Route::group([ 'prefix' => 'projects', 'as' => 'projects.'], function ()
     {
         Route::get('', [ProjectController::class, 'index'])->name('index');
+        Route::group([ 'prefix' => '{project}'], function ()
+        {
+            Route::get('show', [ProjectController::class, 'show'])->name('show');
+
+            Route::group([ 'prefix' => 'subprojects', 'as' => 'subprojects.'], function (){
+                Route::group([ 'prefix' => '{subproject}'], function (){
+                    Route::get('show', [ProjectController::class, 'subprojectsShow'])->name('show');
+                });
+            });
+
+            Route::group([ 'prefix' => 'projectposts', 'as' => 'projectposts.'], function (){
+                Route::group([ 'prefix' => '{projectpost}'], function (){
+                    Route::get('show', [ProjectController::class, 'projectpostsShow'])->name('show');
+                });
+            });
+        });
     });
 
     Route::group([ 'prefix' => 'tests', 'as' => 'tests.'], function ()
@@ -66,6 +91,18 @@ use Illuminate\Support\Facades\Route;
                 Route::delete('destroy', [TestController::class, 'registrationsDestroy'])->name('destroy');
             });
         });
+    });
+
+    Route::group([ 'prefix' => 'subjects', 'as' => 'subjects.'], function ()
+    {
+        Route::get('', [SubjectController::class, 'index'])->name('index');
+
+        Route::group([ 'prefix' => '{subject}'], function ()
+        {
+            Route::get('show', [SubjectController::class, 'show'])->name('show');
+        });
+
+        Route::get('search', [SubjectController::class, 'searchIndex'])->name('search');
     });
 
     Route::group([ 'prefix' => 'projectweeks', 'as' => 'projectweeks.'], function ()
@@ -96,6 +133,18 @@ use Illuminate\Support\Facades\Route;
         Route::get('search', [TripController::class, 'searchIndex'])->name('search');
     });
 
+    Route::group([ 'prefix' => 'electives', 'as' => 'electives.'], function ()
+    {
+        Route::get('', [ElectiveController::class, 'index'])->name('index');
+
+        Route::group([ 'prefix' => '{elective}'], function ()
+        {
+            Route::get('show', [ElectiveController::class, 'show'])->name('show');
+        });
+
+        Route::get('search', [ElectiveController::class, 'searchIndex'])->name('search');
+    });
+    
     Route::group([ 'prefix' => 'electives', 'as' => 'electives.'], function ()
     {
         Route::get('', [ElectiveController::class, 'index'])->name('index');
@@ -152,6 +201,39 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
             Route::get('edit', [ProjectController::class, 'edit'])->name('edit');
             Route::post('update', [ProjectController::class, 'update'])->name('update');
         });
+        Route::get('search', [ProjectController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'subprojects', 'as' => 'subprojects.'], function ()
+    {
+        Route::get('', [SubProjectController::class, 'adminIndex'])->name('index');
+        Route::get('create', [SubProjectController::class, 'create'])->name('create');
+        Route::post('store', [SubProjectController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{subproject}'], function ()
+        {
+            Route::delete('destroy', [SubProjectController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [SubProjectController::class, 'edit'])->name('edit');
+            Route::post('update', [SubProjectController::class, 'update'])->name('update');
+        });
+        Route::post('filter', [SubProjectController::class, 'indexFilter'])->name('filter');
+        Route::get('search', [SubProjectController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'projectposts', 'as' => 'projectposts.'], function ()
+    {
+        Route::get('', [ProjectPostController::class, 'adminIndex'])->name('index');
+        Route::get('create', [ProjectPostController::class, 'create'])->name('create');
+        Route::post('store', [ProjectPostController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{projectpost}'], function ()
+        {
+            Route::delete('destroy', [ProjectPostController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [ProjectPostController::class, 'edit'])->name('edit');
+            Route::post('update', [ProjectPostController::class, 'update'])->name('update');
+        });
+        Route::post('filter', [ProjectPostController::class, 'indexFilter'])->name('filter');
+        Route::get('search', [ProjectPostController::class, 'searchIndex'])->name('search');
     });
 
     Route::group([ 'prefix' => 'websites', 'as' => 'websites.'], function ()
@@ -166,7 +248,7 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
             Route::get('edit', [WebsiteController::class, 'adminEdit'])->name('edit');
             Route::post('update', [WebsiteController::class, 'adminUpdate'])->name('update');
         });
-
+        Route::post('filter', [WebsiteController::class, 'adminIndexFilter'])->name('filter');
         Route::get('search', [WebsiteController::class, 'searchIndex'])->name('search');
     });
 
@@ -193,6 +275,22 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', 'middlware' => ['auth'] ],
         });
 
         Route::get('search', [TestController::class, 'searchIndex'])->name('search');
+    });
+
+    Route::group([ 'prefix' => 'subjects', 'as' => 'subjects.'], function ()
+    {
+        Route::get('', [SubjectController::class, 'adminIndex'])->name('index');
+        Route::get('create', [SubjectController::class, 'create'])->name('create');
+        Route::post('store', [SubjectController::class, 'store'])->name('store');
+
+        Route::group([ 'prefix' => '{subject}'], function ()
+        {
+            Route::delete('destroy', [SubjectController::class, 'destroy'])->name('destroy');
+            Route::get('edit', [SubjectController::class, 'edit'])->name('edit');
+            Route::post('update', [SubjectController::class, 'update'])->name('update');
+        });
+
+        Route::get('search', [SubjectController::class, 'searchIndex'])->name('search');
     });
 
     Route::group([ 'prefix' => 'projectweeks', 'as' => 'projectweeks.'], function ()

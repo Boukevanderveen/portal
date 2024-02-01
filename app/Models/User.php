@@ -24,7 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'type',
+        'isAdmin',
     ];
 
     /**
@@ -52,5 +52,15 @@ class User extends Authenticatable
         return new Attribute(
             get: fn ($value) =>  ["user", "admin"][$value],
         );
+    }
+
+    public function websites()
+    {
+        return $this->hasMany(Website::class);
+    }
+
+    public function subprojects()
+    {
+        return $this->belongsToMany(SubProject::class, 'sub_projects_users', 'user_id', 'sub_project_id');
     }
 }

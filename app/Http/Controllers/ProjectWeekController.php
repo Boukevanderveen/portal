@@ -43,7 +43,7 @@ class ProjectWeekController extends Controller
         return view('admin.projectweeks.edit', compact(['projectweek']));
     }
 
-    function store(UpdateProjectWeekRequest $request)
+    function store(StoreProjectWeekRequest $request)
     {
         $projectweek = new Projectweek;
         $projectweek->name = $request->name;
@@ -117,6 +117,6 @@ class ProjectWeekController extends Controller
     {
         $this->authorize('view', $projectweek);
         $projectweek = Projectweek::where('name', 'like', '%' . $request->search_term.'%')->latest()->paginate(12);
-        return view('admin.projectweek.index', ['projectweeks' => $projectsweek, 'search_term' => $request->search_term]);
+        return view('admin.projectweeks.index', ['projectweeks' => $projectweek, 'search_term' => $request->search_term]);
     }
 }

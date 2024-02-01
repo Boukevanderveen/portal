@@ -28,6 +28,9 @@ class StoreTripRequest extends FormRequest
             'date' => 'required',
             'time' => 'required',
             'location' => 'required',
+            'link' => 'nullable|max:355|',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000|nullable',
+
         ];
 
         
@@ -45,6 +48,10 @@ class StoreTripRequest extends FormRequest
             'time.required' => 'De tijd is verplicht',    
             'date.required' => 'De datum is verplicht',
             'location.required' => 'De locatie is verplicht',
+            'link.max' => 'De link mag niet meer dan :max karakters bevatten',
+            'picture.mimes' => 'De afbeelding moet van type jpeg, png, jpg, gif of svg zijn',
+            'picture.max' => 'De afbeelding mag niet groter dan 1mb zijn',
+            'picture.image' => 'Het het veld afbeelding moet een afbeelding bevatten',
         ];
     }
 }

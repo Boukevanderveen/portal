@@ -35,6 +35,7 @@ class BookController extends Controller
         $book->ISBN = $request->ISBN;
         $book->price = $request->price;
         $book->school_year = $request->school_year;
+        $book->link = $request->link;
         $book->save();
         return redirect('/admin/books')->with('succes', 'Boek succesvol aangemaakt.');
     }
@@ -45,9 +46,11 @@ class BookController extends Controller
         $book->ISBN = $request->ISBN;
         $book->price = $request->price;
         $book->school_year = $request->school_year;
+        $book->link = $request->link;
         $book->update();
         return redirect('/admin/books')->with('succes', 'Boek succesvol bewerkt.');
     }
+
 
     function destroy(Request $request, Book $book)
     {
@@ -60,6 +63,6 @@ class BookController extends Controller
     {
         $this->authorize('view', $book);
         $books = Book::where('name', 'like', '%' . $request->search_term.'%')->latest()->paginate(12);
-        return view('admin.books.index', ['books' => $book, 'search_term' => $request->search_term]);
+        return view('admin.books.index', ['books' => $books, 'search_term' => $request->search_term]);
     }
 }

@@ -5,9 +5,12 @@ import forms from '@tailwindcss/forms';
 export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        "./node_modules/flowbite/**/*.js"
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+        "./src/pages/**/*.{js,jsx,ts,tsx}",
+        "./src/sections/**/*.{js,jsx,ts,tsx}",
+        "./src/components/**/*.{js,jsx,ts,tsx}",
 
     ],
 
@@ -22,6 +25,7 @@ export default {
     plugins: [
         forms,
         require('flowbite/plugin'),
+        require('@tailwindcss/typography')
 
     ],
 

@@ -12,7 +12,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::User()->isAdmin;
     }
 
     /**
@@ -24,9 +24,9 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'name' => 'required|max:55',
-            'link' => 'required|max:255',
             'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000|nullable',
-
+            'intro' => 'max:255|required',
+            'description' => 'required',
         ];
     }
 
@@ -35,11 +35,12 @@ class StoreProjectRequest extends FormRequest
         return [
             'name.required' => 'De naam is verplicht',
             'name.max' => 'De naam mag niet meer dan :max karakters bevatten',
-            'link.required' => 'De link is verplicht',
-            'link.max' => 'De link mag niet meer dan :max karakters bevatten',
             'picture.mimes' => 'De afbeelding moet van type jpeg, png, jpg, gif of svg zijn',
             'picture.max' => 'De afbeelding mag niet groter dan 1mb zijn',
             'picture.image' => 'Het het veld afbeelding moet een afbeelding bevatten',
+            'intro.required' => 'De intro is verplicht',
+            'intro.max' => 'De intro mag niet meer dan :max karakters bevatten',
+            'description.required' => 'De beschrijving is verplicht',
         ];
     }
 }

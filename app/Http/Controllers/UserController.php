@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SubProjects_Users;
+use App\Models\Test_User;
+use App\Models\Website;
+use App\Models\Projectweek_User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
+    function show(User $user){
+        return view('users.show', ['user' => $user]);
+    }
+
     function index(User $user){
         $this->authorize('view', $user);
         return view('admin.users.index', ['users' => User::Paginate(10)]);
@@ -31,6 +39,7 @@ class UserController extends Controller
         exec("sudo useradd -p $(openssl passwd -1 $request->password) fp-$request->name 2>&1", $output, $return_var);
         exec("sudo mkhomedir_helper fp-$request->name");
         $user->isStudent = 1;
+        $user->school_year = $request->school_year;
         }
         if($request->privileges == 2){
             exec("sudo useradd -p $(openssl passwd -1 $request->password) $request->name 2>&1", $output, $return_var);
@@ -41,7 +50,6 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-
         $user->save();
         return redirect('/admin/users')->with('succes', 'Gebruiker succesvol aangemaakt.');
     }
@@ -63,6 +71,7 @@ class UserController extends Controller
             $user->isStudent = 1;
             $user->isAdmin = 0;
             $user->name = $request->name;
+            $user->school_year = $request->school_year;
             exec("sudo deluser $name sudo");
             if(isset($request->password)){
                 $user->password = bcrypt($request->password);
@@ -82,6 +91,7 @@ class UserController extends Controller
             $user->isStudent = 0;
             $user->isAdmin = 1;
             $user->name = $request->name;
+            $user->school_year = null;
             exec("sudo usermod -a -G sudo $user->name");
         }
 
@@ -107,6 +117,10 @@ class UserController extends Controller
             exec("sudo pkill -9 -u `id -u fp-$user->name`; ");
             exec("sudo deluser fp-$user->name -f; sudo rm -r /home/fp-$user->name -f");
         }
+        SubProjects_Users::where('user_id', $user->id)->delete();
+        Website::where('user_id', $user->id)->delete();
+        Test_User::where('user_id', $user->id)->delete();
+        Projectweek_User::where('user_id', $user->id)->delete();
         $user->delete();
         return back()->with('succes', 'Gebruiker succesvol verwijderd.');
     }

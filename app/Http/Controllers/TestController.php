@@ -119,6 +119,7 @@ class TestController extends Controller
     function destroy(Request $request, Test $test)
     {
         $this->authorize('delete', $test);
+        Test_User::where('test_id', $test->id)->delete();
         $test->delete();
         return back()->with('succes', 'Toets succesvol verwijderd.');
     }

@@ -1,5 +1,6 @@
-<nav x-data="{ open: false }" class="fixed w-full bg-[#2f4443] border-b border-gray-100 ">
+<nav x-data="{ open: false }" class="fixed w-full bg-[#2f4443] border-b border-gray-100 ">    
     <!-- Primary Navigation Menu -->
+    
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -33,25 +34,31 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('trips.index')" :active="request()->routeIs('trips.index')">
+                    <x-nav-link :href="route('subjects.index')" :active="request()->routeIs('subjects.*')">
+                        <span class="text-white">Vakken</span>
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('trips.index')" :active="request()->routeIs('trips.*')">
                         <span class="text-white">Uitjes</span>
                     </x-nav-link>
                 </div>
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('electives.index')" :active="request()->routeIs('electives.index')">
+                    <x-nav-link :href="route('electives.index')" :active="request()->routeIs('electives.*')">
                         <span class="text-white">Keuzedelen</span>
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
+                    <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.*')">
                         <span class="text-white">Boeken</span>
                     </x-nav-link>
                 </div>
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.*')">
                         <span class="text-white">Projecten</span>
                     </x-nav-link>
                 </div>
@@ -150,6 +157,11 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link class="text-white" :href="route('tests.index')" :active="request()->routeIs('tests.index')">
                 Toetsen
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="text-white" :href="route('subjects.index')" :active="request()->routeIs('subjects.index')">
+                Vakken
             </x-responsive-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">

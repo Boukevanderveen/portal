@@ -11,8 +11,20 @@ class Project extends Model
 
     protected $fillable = [
         'name',
-        'link',
-        'picture',
+        'intro',
+        'description',
+        'highlighted',
+        'picture'
     ];
+
+    public function subprojects()
+    {
+        return $this->hasMany(SubProject::class);
+    }
+
+    public function projectposts()
+    {
+        return $this->hasMany(ProjectPost::class);
+    }
     
 }
