@@ -32,31 +32,31 @@
         Vakken
     </div>
     <div class="overflow-x-auto">
-    <table style="min-width: 900px"class="w-full text-sm text-left bg-[#3a5757] shadow-lg border">
-        <tbody>
-            @foreach ($subjects as $subject)
-                <span class="font-bold">{{ $subject->name }}</span>
-                <tr class="bg-white border-b" role="button"
-                    onclick="location.href='{{ URL::route('subjects.show', $subject) }}';">
-                    <td class="px-6 py-4">
-                        Praktijk uren: {{ $subject->practical_hours }}
-                    </td>
-                    <td class="px-6 py-4">
-                        Theorie uren: {{ $subject->theory_hours }}
-                    </td>
-                    <td class="px-6 py-4">
-                        Zelfstudie uren: {{ $subject->selfstudy_hours }}
-                    </td>
-                    <td class="px-6 py-4">
-                        Docent: {{ $subject->teacher }}
-                    </td>
-                    <td class="px-6 py-4">
-                        Periode: {{ $subject->period }}
-                    </td>
+        <table style="min-width: 900px"class="w-full text-sm text-left bg-[#3a5757] shadow-lg border">
+            <tbody>
+                @foreach ($subjects as $subject)
+                    <span class="font-bold">{{ $subject->name }}</span>
+                    <tr class="bg-white border-b" role="button"
+                        onclick="location.href='{{ URL::route('subjects.show', $subject) }}';">
+                        <td class="px-6 py-4">
+                            Praktijk uren: {{ $subject->practical_hours }}
+                        </td>
+                        <td class="px-6 py-4">
+                            Theorie uren: {{ $subject->theory_hours }}
+                        </td>
+                        <td class="px-6 py-4">
+                            Zelfstudie uren: {{ $subject->selfstudy_hours }}
+                        </td>
+                        <td class="px-6 py-4">
+                            Docent: {{ $subject->teacher }}
+                        </td>
+                        <td class="px-6 py-4">
+                            Periode: {{ $subject->period }}
+                        </td>
 
-                </tr>
-            @endforeach
-        </tbody>
-</table>
-</div>
-    @endsection
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection
