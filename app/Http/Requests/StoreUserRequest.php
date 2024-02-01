@@ -12,8 +12,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        //return Auth::User()->isAdmin;
-        return true;
+        return Auth::User()->isAdmin;
     }
 
     /**
@@ -25,15 +24,18 @@ class StoreUserRequest extends FormRequest
      public function rules()
      {
          $rules = [];
+         //Voor admins
          if ($this->privileges == 2) {
-             $rules['name'] = 'required|regex:/(?=.*[A-Za-z])+/|min:3|max:55|unique:users,name';
+            $rules['name'] = 'required|regex:/(?=.*[A-Za-z])+/|min:3|max:55|unique:users,name';
          }
+         //Voor studenten
          else{
              $rules['name'] = 'required|numeric|min:3|max:999999|unique:users,name';
+             $rules['school_year'] = 'required';
          }
  
          $rules['email'] = 'required|email|max:255|unique:users,email,';
-         $rules['password'] = 'nullable|max:255';
+         $rules['password'] = 'required|max:255';
          return $rules;
      }
  
@@ -57,7 +59,8 @@ class StoreUserRequest extends FormRequest
          $messages['email.unique'] = 'Dit E-mail is al in gebruik';
          $messages['email.email'] ='Het veld E-mail moet een geldige E-mail bevatten';
          $messages['password.max'] = 'Het veld wachtwoord mag niet meer dan :max karakters bevatten';
-         
+         $messages['school_year.required'] = 'Het veld schooljaar is verplicht';
+         $messages['password.required'] = 'Het veld wachtwoord is verplicht';
          return $messages; 
      }
 }

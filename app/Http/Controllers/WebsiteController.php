@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use File;
 use ZipArchive;
 use Illuminate\Support\Facades\Process;
-use DB;
+use Illuminate\Support\Collection;
 
 class WebsiteController extends Controller
 {
@@ -38,26 +38,6 @@ class WebsiteController extends Controller
     function update(UpdateWebsiteRequest $request, Website $website)
     {
         $this->authorize('update', $website);
-        /*
-        $website->name = $request->name;
-        $website->description = $request->description;
-        if ($request->hasFile('file')) 
-        {
-            File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
-
-            $fileName = $request->file->getClientOriginalName();
-            Storage::disk('websites')->putFileAs(''.$website->user_id, $request->file('file'), $fileName);
-            $zip = new ZipArchive;
-            if ($zip->open(Storage::disk('websites')->path(''.$website->user_id.'/'.$fileName.'')) === TRUE) {
-                // Unzip Path
-                $zip->extractTo(Storage::disk('websites')->path(''.$website->user_id.'/'));
-                $zip->close();
-                unlink(Storage::disk('websites')->path(''.$website->user_id.'/'.$fileName.''));
-            }
-            $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
-
-        }
-        */
         $website->name = $request->name;
         $website->link = $request->link;
         $website->isPublic = $request->isPublic;
@@ -68,27 +48,6 @@ class WebsiteController extends Controller
     function store(StoreWebsiteRequest $request, Website $website)
     {
         $this->authorize('create', $website);
-        /*
-        $website = new Website;
-        $website->name = $request->name;
-        $website->description = $request->description;
-        $website->user_id = Auth::User()->id;
-        if ($request->hasFile('file')) 
-        {
-            $fileName = $request->file->getClientOriginalName();
-            Storage::disk('websites')->putFileAs(''.$request->student_id, $request->file('file'), $fileName);
-            $zip = new ZipArchive;
-            if ($zip->open(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.'')) === TRUE) {
-                // Unzip Path
-                $zip->extractTo(Storage::disk('websites')->path(''.$request->student_id.'/'));
-                $zip->close();
-                unlink(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.''));
-            }
-        }
-
-        $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
-        $website->save();
-        */
         $website = new Website;
         $website->name = $request->name;
         $website->link = $request->link;
@@ -101,10 +60,7 @@ class WebsiteController extends Controller
     function destroy(Request $request, Website $website)
     {
         $this->authorize('delete', $website);
-        
-        //File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
         $website->delete();
-        
         return redirect('websites/personal')->with('succes', 'Website succesvol verwijderd.');
     }
     
@@ -116,84 +72,34 @@ class WebsiteController extends Controller
     function adminCreate(Website $website){
         $this->authorize('adminCreate', $website);
         $students = User::where('isStudent', 1)->get();
-        return view('admin.websites.create', compact(['students']));
+        $users = User::All();
+        return view('admin.websites.create', compact(['students', 'users']));
     }
 
     function adminEdit(Website $website){
         $this->authorize('adminUpdate', $website);
         $students = User::where('isStudent', 1)->get();
-        return view('admin.websites.edit', compact(['website', 'students']));
+        $users = User::All();
+        return view('admin.websites.edit', compact(['website', 'students', 'users']));
     }
 
     function adminStore(StoreWebsiteRequest $request)
     {
-        /*
-        if ($request->hasFile('db')) 
-        {
-        $dbFileName = $request->db->getClientOriginalName();
-        $dbFilePath = Storage::disk('websites')->path('db_exports/'.$dbFileName.'');
-        Storage::disk('websites')->putFileAs('db_exports', $request->file('db'), $dbFileName);
-
-        DB::statement("CREATE DATABASE $request->db_name");
-        //DB::statement("USE $request->db_name; SOURCE $dbFilePath");
-        $sql = 'mysql -u root '.$request->db_name.' < '.$dbFilePath.'';
-        $output = shell_exec($sql); 
-        }
-
-        $website = new Website;
-        $website->name = $request->name;
-        $website->description = $request->description;
-        $website->user_id = $request->student_id;
-        if ($request->hasFile('file')) 
-        {
-            $fileName = $request->file->getClientOriginalName();
-            Storage::disk('websites')->putFileAs(''.$request->student_id, $request->file('file'), $fileName);
-            $zip = new ZipArchive;
-            if ($zip->open(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.'')) === TRUE) {
-                // Unzip Path
-                $zip->extractTo(Storage::disk('websites')->path(''.$request->student_id.'/'));
-                $zip->close();
-                unlink(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.''));
-            }
-        }
-
-        $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
-        */
         $website = new Website;
         $website->name = $request->name;
         $website->link = $request->link;
         $website->isPublic = $request->isPublic;
-        $website->user_id = Auth::User()->id;
+        $website->user_id = $request->user;
         $website->save();
         return redirect('/admin/websites')->with('succes', 'Website succesvol aangemaakt.');
     }
 
     function adminUpdate(UpdateWebsiteRequest $request, Website $website)
     {
-        /*
-        $website->name = $request->name;
-        $website->description = $request->description;
-        $website->user_id = $request->student_id;
-        if ($request->hasFile('file')) 
-        {
-            File::deleteDirectory(Storage::disk('websites')->path(''.$request->student_id.'/'.$website->folder_name.''));
-
-            $fileName = $request->file->getClientOriginalName();
-            Storage::disk('websites')->putFileAs(''.$request->student_id, $request->file('file'), $fileName);
-            $zip = new ZipArchive;
-            if ($zip->open(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.'')) === TRUE) {
-                // Unzip Path
-                $zip->extractTo(Storage::disk('websites')->path(''.$request->student_id.'/'));
-                $zip->close();
-                unlink(Storage::disk('websites')->path(''.$request->student_id.'/'.$fileName.''));
-            }
-            $website->folder_name = basename($request->file('file')->getClientOriginalName(), '.'.$request->file('file')->getClientOriginalExtension());
-
-        }
-        */
         $website->name = $request->name;
         $website->link = $request->link;
         $website->isPublic = $request->isPublic;
+        $website->user_id = $request->user;
         $website->update();
         return redirect('/admin/websites')->with('succes', 'Website succesvol bewerkt.');
     }
@@ -201,7 +107,6 @@ class WebsiteController extends Controller
     function adminDestroy(Request $request, Website $website)
     {
         $this->authorize('delete', $website);
-        //File::deleteDirectory(Storage::disk('websites')->path(''.$website->user_id.'/'.$website->folder_name.''));
         $website->delete();
         return back()->with('succes', 'Website succesvol verwijderd.');
     }
@@ -209,7 +114,39 @@ class WebsiteController extends Controller
     public function searchIndex(Website $website, Request $request)
     {
         $this->authorize('view', $website);
-        $websites = Book::where('name', 'like', '%' . $request->search_term.'%')->latest()->paginate(12);
+        $websites = Website::where('name', 'like', '%' . $request->search_term.'%')->latest()->paginate(12);
         return view('admin.websites.index', ['websites' => $websites, 'search_term' => $request->search_term]);
     }
+
+    public function indexFilter(Website $website, Request $request)
+    {
+        if($request->school_year_filter == 0){
+            return redirect('/websites');
+        }
+        $websites = new Collection();
+        $users = User::where('school_year', $request->school_year_filter)->get();
+        foreach($users as $user){
+            foreach($user->websites as $website){
+                $websites->push($website);
+            }
+        }
+        return view('websites.index', ['websites' => $websites, 'school_year_filter' => $request->school_year_filter]);
+    }
+
+    public function adminIndexFilter(Website $website, Request $request)
+    {
+        $this->authorize('view', $website);
+        if($request->school_year_filter == 0){
+            return redirect('admin/websites');
+        }
+        $websites = new Collection();
+        $users = User::where('school_year', $request->school_year_filter)->get();
+        foreach($users as $user){
+            foreach($user->websites as $website){
+                $websites->push($website);
+            }
+        }
+        return view('admin.websites.index', ['websites' => $websites, 'school_year_filter' => $request->school_year_filter]);
+    }
+    
 }

@@ -33,6 +33,12 @@
              <span class="flex-1 ml-3 whitespace-nowrap ">Toetsen</span>
           </a>
        </li>
+       <li>
+          <a href="{{ route('admin.subjects.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+          <i class="fa-solid fa-pen-to-square"></i>
+             <span class="flex-1 ml-3 whitespace-nowrap ">Vakken</span>
+          </a>
+       </li>
        <li>   
           <a href="{{ route('admin.trips.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
              <i class="fa-solid fa-umbrella-beach"></i>
@@ -53,8 +59,20 @@
        </li>
        <li>
           <a href="{{ route('admin.projects.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
-             <i class="fa-regular fa-keyboard"></i>
+          <i class="fa-solid fa-code"></i>
              <span class="flex-1 ml-3 whitespace-nowrap ">Projecten</span>
+          </a>
+       </li>
+       <li>
+          <a href="{{ route('admin.subprojects.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+             <i class="fa-regular fa-keyboard"></i>
+             <span class="flex-1 ml-3 whitespace-nowrap ">Subprojecten</span>
+          </a>
+       </li>
+       <li>
+          <a href="{{ route('admin.projectposts.index') }}" class="flex items-center p-2 px-5 text-gray-900 rounded-lg dark:text-black ">
+            <i class="fa-solid fa-newspaper"></i>
+             <span class="flex-1 ml-3 whitespace-nowrap ">Project berichten</span>
           </a>
        </li>
        <li>

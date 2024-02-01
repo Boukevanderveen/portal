@@ -41,7 +41,17 @@ class TripController extends Controller
         $trip->date = $request->date;
         $trip->time = $request->time;
         $trip->location = $request->location;
+        $trip->link = $request->link;
+        if ($request->hasFile('picture')) 
+        {
+            $fileName = time() . '.' . $request->picture->extension();
+            $file = $request->file('picture');
+            $trip->picture = $fileName;
+        }
         $trip->save();
+        if(isset($file)){
+            $file->move(('/home/lara/public_html/images/trips/' . $trip->id), $fileName);
+        }
         return redirect('/admin/trips')->with('succes', 'Uitje succesvol aangemaakt.');
     }
 
@@ -52,6 +62,21 @@ class TripController extends Controller
         $trip->date = $request->date;
         $trip->time = $request->time;
         $trip->location = $request->location;
+        $trip->link = $request->link;
+        if ($request->hasFile('picture')) 
+        {
+            $fileName = time() . '.' . $request->picture->extension();
+            $file = $request->file('picture');
+            $path = public_path() . '/images/trips/' . $trip->id . '/'. $trip->picture .' ';
+        }
+        if(isset($file)){
+            if(NULL !== $trip->picture){
+                unlink('/home/lara/public_html/images/trips/' . $trip->id . '/'. $trip->picture .'');
+            }
+
+            $file->move(('/home/lara/public_html/images/trips/' . $trip->id), $fileName);
+            $trip->picture = $fileName;
+        }
         $trip->update();
         return redirect('/admin/trips')->with('succes', 'Uitje succesvol bewerkt.');
     }
@@ -59,6 +84,9 @@ class TripController extends Controller
     function destroy(Request $request, Trip $trip)
     {
         $this->authorize('delete', $trip);
+        if(NULL !== $trip->picture){
+        //unlink('/home/lara/public_html/images/trips/' . $trip->id . '/'. $trip->picture .'');
+        }
         $trip->delete();
         return back()->with('succes', 'Uitje succesvol verwijderd.');
     }
@@ -66,7 +94,8 @@ class TripController extends Controller
     public function searchIndex(Trip $trip, Request $request)
     {
         $this->authorize('view', $trip);
-        $trips = Test::where('name', 'like', '%' . $request->search_term.'%')->latest()->paginate(12);
+        $trips = Trip::where('name', 'like', '%' . $request->search_term.'%')->latest()->paginate(12);
         return view('admin.trips.index', ['trips' => $trips, 'search_term' => $request->search_term]);
     }
+
 }

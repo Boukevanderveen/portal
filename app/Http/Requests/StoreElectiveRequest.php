@@ -42,7 +42,7 @@ class StoreElectiveRequest extends FormRequest
             'description.max' => 'De bescrijving mag niet meer dan :max karakters bevatten',
             'hours.required' => 'De uren is verplicht',  
             'hours.numeric' => 'Het veld uren mag alleen cijfers bevatten',    
-            'hours.max' => 'De uren mag niet hoger dan :max zijn',    
+            'hours.max' => 'Het veld uren mag niet hoger dan :max zijn',    
             'teacher.required' => 'De docent is verplicht',  
             'teacher.max' => 'De docent mag niet meer dan :max karakter zijn',    
             'period.required' => 'De periode is verplicht',
