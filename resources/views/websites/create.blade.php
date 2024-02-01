@@ -15,8 +15,8 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
                                 Naam *
                             </label>
-                            <input
-                            value="{{old('name')}}" class="shadow appearance-none border @error('name') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            <input value="{{ old('name') }}"
+                                class="shadow appearance-none border @error('name') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 name="name" id="name" type="text">
                             @if ($errors->has('name'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('name') }}</p>
@@ -27,8 +27,8 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="link">
                                 Link *
                             </label>
-                            <input
-                            value="{{old('link')}}" class="shadow appearance-none border @error('link') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            <input value="{{ old('link') }}"
+                                class="shadow appearance-none border @error('link') border-red-500 @enderror  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 name="link" id="link" type="text">
                             @if ($errors->has('link'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('link') }}</p>
@@ -39,9 +39,10 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="isPublic">
                                 Weergave op MBO Portal *
                             </label>
-                            <select class="text-sm w-full p-2.5 rounded border border-gray-300" id="isPublic" name="isPublic">
-                                <option value="0" @if(old('isPublic') !== null && old('isPublic') == 0) selected @endif>Privé</option>
-                                <option value="1" @if(old('isPublic') !== null && old('isPublic') == 1) selected @endif >Publiek</option>
+                            <select class="text-sm w-full p-2.5 rounded border border-gray-300" id="isPublic"
+                                name="isPublic">
+                                <option value="0" @if (old('isPublic') !== null && old('isPublic') == 0) selected @endif>Privé</option>
+                                <option value="1" @if (old('isPublic') !== null && old('isPublic') == 1) selected @endif>Publiek</option>
                             </select>
                             @if ($errors->has('isPublic'))
                                 <p class="text-red-500 text-xs italic">{{ $errors->first('isPublic') }}</p>
@@ -52,15 +53,15 @@
                             Bevestig</button>
                     </div>
                 </div>
-                
+
             </form>
         </div>
     </div>
 @endsection
 
 <script>
-function doSubmit(){
-    var price = document.getElementById('price').value.replace(",",".");
-    document.getElementById('price').value = document.getElementById('price').value.replace(",",".");
-}
+    function doSubmit() {
+        var price = document.getElementById('price').value.replace(",", ".");
+        document.getElementById('price').value = document.getElementById('price').value.replace(",", ".");
+    }
 </script>

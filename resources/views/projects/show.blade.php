@@ -48,7 +48,7 @@
         <div class="col-span-5 ">
             <span class="prose">{!! $project->description !!}</span>
             <div class="grid grid-cols-3 gap-4">
-            @if (!$project->subprojects->isEmpty())
+                @if (!$project->subprojects->isEmpty())
                     <div class="text-3xl col-span-3">
                         Berichten
                     </div>

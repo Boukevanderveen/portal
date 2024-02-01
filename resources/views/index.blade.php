@@ -32,7 +32,7 @@
             </div>
             <div class="hidden lg:block"style=" width-100%; height: 400px; overflow: hidden">
 
-            <img src="{{ asset('/firda.jpg') }}">
+                <img src="{{ asset('/firda.jpg') }}">
 
             </div>
         </div>
@@ -40,18 +40,20 @@
             <div class="w-full text-3xl font-bold">
                 Welkom op Mbo-Portal
             </div>
-            <p class="mb-2 text-1xl font-bold tracking-tight text-gray-600">Op deze website vind je alle informatie binnen de opleiding Software Development op Firda. Hier tonen we onze projecten waar onze ontwikkelingsteams mee bezig (geweest) zijn. Voor studenten is het ook mogelijk om veel informatie te vinden over de studie. </p>
-                @if (!$projects->isEmpty())
+            <p class="mb-2 text-1xl font-bold tracking-tight text-gray-600">Op deze website vind je alle informatie binnen
+                de opleiding Software Development op Firda. Hier tonen we onze projecten waar onze ontwikkelingsteams mee
+                bezig (geweest) zijn. Voor studenten is het ook mogelijk om veel informatie te vinden over de studie. </p>
+            @if (!$projects->isEmpty())
                 <a href="#projects"
-                                    class="mt-2 inline-flex items-center px-3 py-2 text-sm text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 rounded-sm text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
-                                    Bekijk onze werkzaamheden
-                                    <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 14 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                    </svg>
-                                </a>
-                @endif
+                    class="mt-2 inline-flex items-center px-3 py-2 text-sm text-950 bg-[#ffcd00] hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 rounded-sm text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
+                    Bekijk onze werkzaamheden
+                    <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            @endif
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
         </div>
 
@@ -99,30 +101,31 @@
                     Komende projectweken
                 </div>
                 <div class="overflow-x-auto">
-                    <table style="min-width:900px;" class="table-auto w-full w-full text-sm text-left bg-[#3a5757] shadow-lg border z-1">
-                    <tbody>
-                        @foreach ($projectweeks as $projectweek)
-                            <tr class="bg-white border-b ">
-                                <td class="px-6 py-4">
-                                    {{ $projectweek->name }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    Periode {{ $projectweek->period }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    Week {{ $projectweek->week }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ date('d-m-Y', strtotime($projectweek->start_date)) }} -
-                                    {{ date('d-m-Y', strtotime($projectweek->end_date)) }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    Doelgroep: {{ $projectweek->target_class }}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    <table style="min-width:900px;"
+                        class="table-auto w-full w-full text-sm text-left bg-[#3a5757] shadow-lg border z-1">
+                        <tbody>
+                            @foreach ($projectweeks as $projectweek)
+                                <tr class="bg-white border-b ">
+                                    <td class="px-6 py-4">
+                                        {{ $projectweek->name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Periode {{ $projectweek->period }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Week {{ $projectweek->week }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ date('d-m-Y', strtotime($projectweek->start_date)) }} -
+                                        {{ date('d-m-Y', strtotime($projectweek->end_date)) }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Doelgroep: {{ $projectweek->target_class }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         @endif
@@ -136,12 +139,10 @@
                     @foreach ($projects as $project)
                         <div style="z-index:1" class="bg-white border border-gray-200 rounded-lg shadow ">
                             <div class="hidden lg:block"style="width-100%; height: 400px; overflow: hidden">
-                                <img
-                                    src="{{ asset('/images/projects/' . $project->id . '/' . $project->picture . '') }}">
+                                <img src="{{ asset('/images/projects/' . $project->id . '/' . $project->picture . '') }}">
                             </div>
                             <div class="block lg:hidden"style="width-100%">
-                                <img
-                                    src="{{ asset('/images/projects/' . $project->id . '/' . $project->picture . '') }}">
+                                <img src="{{ asset('/images/projects/' . $project->id . '/' . $project->picture . '') }}">
                             </div>
                             <div class="p-5">
                                 <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $project->name }}</p>
@@ -166,6 +167,8 @@
         @endif
     </div>
     <style>
-        html{scroll-behavior:smooth}
+        html {
+            scroll-behavior: smooth
+        }
     </style>
 @endsection
